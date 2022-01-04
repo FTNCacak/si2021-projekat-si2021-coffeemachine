@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SI2021-CoffeeMachineApp", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data Layer", "Data Layer\Data Layer.csproj", "{ACFA0A3C-DEC2-422F-B8C2-6006370A81E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business Layer", "Business Layer\Business Layer.csproj", "{3E78095E-EDA5-490C-9E8F-8D0A7FB12982}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{ACFA0A3C-DEC2-422F-B8C2-6006370A81E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACFA0A3C-DEC2-422F-B8C2-6006370A81E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACFA0A3C-DEC2-422F-B8C2-6006370A81E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E78095E-EDA5-490C-9E8F-8D0A7FB12982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E78095E-EDA5-490C-9E8F-8D0A7FB12982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E78095E-EDA5-490C-9E8F-8D0A7FB12982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E78095E-EDA5-490C-9E8F-8D0A7FB12982}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
