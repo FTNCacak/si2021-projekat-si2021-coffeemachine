@@ -31,7 +31,7 @@ namespace Data_Layer
                 reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    Proizvod pr = new Proizvod() { ID_Proizvoda = reader.GetInt32(0), Naziv = reader.GetString(1), Opis = reader.GetString(2), Slika_Proizvoda = reader.GetString(4)};
+                    Proizvod pr = new Proizvod() { ID_Proizvoda = reader.GetInt32(0), Naziv = reader.GetString(1), Opis = reader.GetString(2), Slika_Proizvoda = reader.GetString(4), Cena=reader.GetDecimal(5)};
                     int IDProizvodjaca = reader.GetInt32(3);
                     foreach(Proizvodjac proizvodjac in magacin.ListaProizvodjaca)
                     {
@@ -162,12 +162,13 @@ namespace Data_Layer
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
                 conn.Open();
-                string query = "INSERT INTO Proizvod VALUES(@naziv, @opis, @id_proizvodjaca, @slika)";
+                string query = "INSERT INTO Proizvod VALUES(@naziv, @opis, @id_proizvodjaca, @slika, @cena)";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@naziv", p.Naziv);
                 comm.Parameters.AddWithValue("@opis", p.Opis);
                 comm.Parameters.AddWithValue("@id_proizvodjaca", p.FK_Proizvodjac.ID_Proizvodjaca);
                 comm.Parameters.AddWithValue("@slika", p.Slika_Proizvoda);
+                comm.Parameters.AddWithValue("@cena", p.Cena);
                 return comm.ExecuteNonQuery();                
             }
         }
@@ -360,13 +361,14 @@ namespace Data_Layer
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
                 conn.Open();
-                string query = "UPDATE Proizvod SET Naziv = @naziv, Opis = @opis, FK_ID_Proizvodjaca = @id_proizvodjaca, Slika_Proizvoda=@slika WHERE ID_Proizvoda = @id";
+                string query = "UPDATE Proizvod SET Naziv = @naziv, Opis = @opis, FK_ID_Proizvodjaca = @id_proizvodjaca, Slika_Proizvoda=@slika, Cena=@cena WHERE ID_Proizvoda = @id";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@naziv", p.Naziv);
                 comm.Parameters.AddWithValue("@opis", p.Opis);
                 comm.Parameters.AddWithValue("@id_proizvodjaca", p.FK_Proizvodjac.ID_Proizvodjaca);
                 comm.Parameters.AddWithValue("@id", ID);
                 comm.Parameters.AddWithValue("@slika", p.Slika_Proizvoda);
+                comm.Parameters.AddWithValue("@cena", p.Cena);
                 return comm.ExecuteNonQuery();
             }
         }

@@ -13,5 +13,6 @@ namespace Data_Layer.Models
         public string Opis { get; set; }
         public Proizvodjac FK_Proizvodjac { get; set; }
         public string Slika_Proizvoda { get; set; }
+        public decimal Cena { get; set; }
     }
 }

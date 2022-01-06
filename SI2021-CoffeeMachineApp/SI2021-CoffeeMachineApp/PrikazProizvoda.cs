@@ -1,4 +1,7 @@
 ﻿using System;
+using Data_Layer;
+using Data_Layer.Models;
+using Business_Layer;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,29 +15,136 @@ namespace SI2021_CoffeeMachineApp
 {
     public partial class PrikazProizvoda : Form
     {
-        public PrikazProizvoda()
+        public Magacin magacin { get; set; }
+        public int nacinSortiranja { get; set; }
+        private readonly BusinessRepository br = new BusinessRepository();
+        public PrikazProizvoda(Magacin magacin)
         {
+            this.magacin = magacin;
             InitializeComponent();
         }
 
         private void PrikazProizvoda_Load(object sender, EventArgs e)
         {
-            /*DataGridViewImageColumn dgvimgcol = new DataGridViewImageColumn();
-            dgvimgcol.HeaderText = "C:\\Users\\sasha\\Desktop\\Asajment.jpg";
-            dgvimgcol.ImageLayout = DataGridViewImageCellLayout.Stretch;
-
-            dataGridView1.Columns.Add(dgvimgcol);
-
-            dataGridView1.RowTemplate.Height = 250;
-
-            dataGridView1.AllowUserToAddRows = false;*/
+            cbNacinSortiranja.SelectedIndex = 0;
             DataGridViewImageColumn kolona = new DataGridViewImageColumn();
-            kolona.HeaderText = "DN";
-            kolona.ImageLayout = DataGridViewImageCellLayout.Stretch;
-            kolona.Name = "DEEZ";
+            kolona.HeaderText = "Slika proizvoda";
+            kolona.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            kolona.Name = "Slika_Proizvoda";
             dataGridView1.Columns.Insert(0, kolona);
-            Bitmap pb = new Bitmap("C:\\Users\\sasha\\Desktop\\Asajment.jpg");
-            ((DataGridViewImageCell)dataGridView1.Rows[0].Cells[0]).Value = pb;
+            dataGridView1.Columns.Add("ID_Proizvoda", "ID proizvoda");
+            dataGridView1.Columns.Add("Naziv", "Naziv proizvoda");
+            dataGridView1.Columns.Add("Cena", "Cena proizvoda");
+            dataGridView1.Columns.Add("Opis", "Opis proizvoda");
+            dataGridView1.Columns.Add("FK_ID_Proizvodjaca", "Proizvođač");
+            dataGridView1.Rows.Add(magacin.ListaProizvoda.Count-1);
+            for (int i = 0; i < magacin.ListaProizvoda.Count; i++)
+            {
+                dataGridView1.Rows[i].Height = 50;
+                Bitmap pb = new Bitmap(magacin.ListaProizvoda[i].Slika_Proizvoda);
+                ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = pb;
+                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaProizvoda[i].ID_Proizvoda;
+                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaProizvoda[i].Naziv;
+                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaProizvoda[i].Cena;
+                dataGridView1.Rows[i].Cells[4].Value = magacin.ListaProizvoda[i].Opis;
+                dataGridView1.Rows[i].Cells[5].Value = magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv;
+            }
+        }
+        private void Sort()
+        {
+            for(int i=0;i<magacin.ListaProizvoda.Count-1;i++)
+            {
+                for (int j = i; j < magacin.ListaProizvoda.Count; j++)
+                {
+                    if(nacinSortiranja==0 && magacin.ListaProizvoda[i].Naziv.CompareTo(magacin.ListaProizvoda[j].Naziv)>0)
+                    {
+                        Proizvod pom = magacin.ListaProizvoda[i];
+                        magacin.ListaProizvoda[i]= magacin.ListaProizvoda[j];
+                        magacin.ListaProizvoda[j] = pom;
+                    }
+                    else if (nacinSortiranja == 1 && magacin.ListaProizvoda[i].Naziv.CompareTo(magacin.ListaProizvoda[j].Naziv) < 0)
+                    {
+                        Proizvod pom = magacin.ListaProizvoda[i];
+                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
+                        magacin.ListaProizvoda[j] = pom;
+                    }
+                    else if (nacinSortiranja == 2 && magacin.ListaProizvoda[i].Cena > magacin.ListaProizvoda[j].Cena)
+                    {
+                        Proizvod pom = magacin.ListaProizvoda[i];
+                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
+                        magacin.ListaProizvoda[j] = pom;
+                    }
+                    else if (nacinSortiranja == 3 && magacin.ListaProizvoda[i].Cena < magacin.ListaProizvoda[j].Cena)
+                    {
+                        Proizvod pom = magacin.ListaProizvoda[i];
+                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
+                        magacin.ListaProizvoda[j] = pom;
+                    }
+                    else if (nacinSortiranja == 4 && magacin.ListaProizvoda[i].ID_Proizvoda < magacin.ListaProizvoda[j].ID_Proizvoda)
+                    {
+                        Proizvod pom = magacin.ListaProizvoda[i];
+                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
+                        magacin.ListaProizvoda[j] = pom;
+                    }
+                    else if (nacinSortiranja == 5 && magacin.ListaProizvoda[i].ID_Proizvoda > magacin.ListaProizvoda[j].ID_Proizvoda)
+                    {
+                        Proizvod pom = magacin.ListaProizvoda[i];
+                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
+                        magacin.ListaProizvoda[j] = pom;
+                    }
+                    else if (nacinSortiranja == 6 && magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv.CompareTo(magacin.ListaProizvoda[j].FK_Proizvodjac.Naziv) < 0)
+                    {
+                        Proizvod pom = magacin.ListaProizvoda[i];
+                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
+                        magacin.ListaProizvoda[j] = pom;
+                    }
+                    else if (nacinSortiranja == 7 && magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv.CompareTo(magacin.ListaProizvoda[j].FK_Proizvodjac.Naziv) < 0)
+                    {
+                        Proizvod pom = magacin.ListaProizvoda[i];
+                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
+                        magacin.ListaProizvoda[j] = pom;
+                    }
+
+                }
+            }
+        }
+        private void Prikazi()
+        {
+            dataGridView1.Rows.Clear();
+            if (magacin.ListaKorisnika.Count > 1)
+                dataGridView1.Rows.Add(magacin.ListaProizvoda.Count - 1);
+            for (int i = 0; i < magacin.ListaProizvoda.Count; i++)
+            {
+                dataGridView1.Rows[i].Height = 50;
+                Bitmap pb = new Bitmap(magacin.ListaProizvoda[i].Slika_Proizvoda);
+                ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = pb;
+                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaProizvoda[i].ID_Proizvoda;
+                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaProizvoda[i].Naziv;
+                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaProizvoda[i].Cena;
+                dataGridView1.Rows[i].Cells[4].Value = magacin.ListaProizvoda[i].Opis;
+                dataGridView1.Rows[i].Cells[5].Value = magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv;
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Sort();
+            Prikazi();
+        }
+
+        private void cbNacinSortiranja_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            nacinSortiranja = cbNacinSortiranja.SelectedIndex;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow Row in dataGridView1.SelectedRows)
+            {
+                int id = Convert.ToInt32(Row.Cells[1].Value.ToString());
+                br.DeleteProizvod(id);
+                magacin.ListaProizvoda.RemoveAt(Row.Index);
+            }
+            Prikazi();
         }
     }
 }

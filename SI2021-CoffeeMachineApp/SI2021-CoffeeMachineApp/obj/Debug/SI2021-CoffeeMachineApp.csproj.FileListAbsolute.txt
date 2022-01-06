@@ -14,3 +14,5 @@ D:\Git\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\SI2021-Coffe
 D:\Git\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\SI2021-CoffeeMachineApp\obj\Debug\SI2021_CoffeeMachineApp.Pocetna.resources
 D:\Git\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\SI2021-CoffeeMachineApp\obj\Debug\SI2021_CoffeeMachineApp.Login.resources
 D:\Git\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\SI2021-CoffeeMachineApp\obj\Debug\SI2021_CoffeeMachineApp.PrikazProizvoda.resources
+D:\Git\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\SI2021-CoffeeMachineApp\obj\Debug\SI2021_CoffeeMachineApp.PrikazProizvodjaca.resources
+D:\Git\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\SI2021-CoffeeMachineApp\obj\Debug\SI2021_CoffeeMachineApp.PrikazKorisnika.resources

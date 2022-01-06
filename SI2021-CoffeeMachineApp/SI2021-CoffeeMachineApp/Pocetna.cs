@@ -1,5 +1,6 @@
 ﻿using System;
 using Business_Layer;
+using System.IO;
 using Data_Layer;
 using Data_Layer.Models;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace SI2021_CoffeeMachineApp
     public partial class Pocetna : Form
     {
         private Korisnik korisnik = new Korisnik();
+        public Magacin magacin { get; set; }
         public Pocetna()
         {
             InitializeComponent();
@@ -38,6 +40,8 @@ namespace SI2021_CoffeeMachineApp
                         upisRadnikaToolStripMenuItem.Visible = true;
                         upisKorisnikaToolStripMenuItem.Visible = true;
                     }
+                    BusinessRepository br = new BusinessRepository();
+                    magacin = br.getData();
                 }
             }
             
@@ -45,8 +49,25 @@ namespace SI2021_CoffeeMachineApp
 
         private void prikazProizvodaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrikazProizvoda pp = new PrikazProizvoda();
+
+            PrikazProizvoda pp = new PrikazProizvoda(magacin);
             pp.ShowDialog();
+        }
+
+        private void Pocetna_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void prikazProizvođačaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrikazProizvodjaca pp = new PrikazProizvodjaca(magacin);
+            pp.ShowDialog();
+        }
+
+        private void prikazKorisnikaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrikazKorisnika pk = new PrikazKorisnika(magacin);
+            pk.ShowDialog();
         }
     }
 }

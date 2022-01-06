@@ -94,6 +94,7 @@ namespace SI2021_CoffeeMachineApp
             this.prikazProizvođačaToolStripMenuItem.Name = "prikazProizvođačaToolStripMenuItem";
             this.prikazProizvođačaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.prikazProizvođačaToolStripMenuItem.Text = "Prikaz proizvođača";
+            this.prikazProizvođačaToolStripMenuItem.Click += new System.EventHandler(this.prikazProizvođačaToolStripMenuItem_Click);
             // 
             // prikazDobavljačaToolStripMenuItem
             // 
@@ -132,6 +133,7 @@ namespace SI2021_CoffeeMachineApp
             this.prikazKorisnikaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.prikazKorisnikaToolStripMenuItem.Text = "Prikaz korisnika";
             this.prikazKorisnikaToolStripMenuItem.Visible = false;
+            this.prikazKorisnikaToolStripMenuItem.Click += new System.EventHandler(this.prikazKorisnikaToolStripMenuItem_Click);
             // 
             // upisToolStripMenuItem
             // 
@@ -221,6 +223,7 @@ namespace SI2021_CoffeeMachineApp
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Pocetna";
             this.Text = "Magacin";
+            this.Load += new System.EventHandler(this.Pocetna_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
