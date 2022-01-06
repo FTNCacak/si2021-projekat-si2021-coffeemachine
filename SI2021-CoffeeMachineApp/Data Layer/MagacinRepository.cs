@@ -10,12 +10,13 @@ namespace Data_Layer
 {
     public class MagacinRepository
     {
-        private string ConnString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SI2021-CoffeeMachineDataBase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string ConnString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SI2021-CoffeeMachine;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public Magacin GetAllData()
         {
             Magacin magacin = new Magacin();
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "SELECT * FROM Proizvodjac";
                 SqlCommand comm = new SqlCommand(query, conn);
                 SqlDataReader reader = comm.ExecuteReader();
@@ -24,12 +25,13 @@ namespace Data_Layer
                     Proizvodjac pr = new Proizvodjac() { ID_Proizvodjaca = reader.GetInt32(0), Naziv = reader.GetString(1), Drzava = reader.GetString(2), Adresa = reader.GetString(3), Opis = reader.GetString(4)};
                     magacin.ListaProizvodjaca.Add(pr);
                 }
+                reader.Close();
                 query = "SELECT * FROM Proizvod";
                 comm = new SqlCommand(query, conn);
                 reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    Proizvod pr = new Proizvod() { ID_Proizvoda = reader.GetInt32(0), Naziv = reader.GetString(1), Opis = reader.GetString(2) };
+                    Proizvod pr = new Proizvod() { ID_Proizvoda = reader.GetInt32(0), Naziv = reader.GetString(1), Opis = reader.GetString(2), Slika_Proizvoda = reader.GetString(4)};
                     int IDProizvodjaca = reader.GetInt32(3);
                     foreach(Proizvodjac proizvodjac in magacin.ListaProizvodjaca)
                     {
@@ -41,6 +43,7 @@ namespace Data_Layer
                     }
                     magacin.ListaProizvoda.Add(pr);
                 }
+                reader.Close();
                 query = "SELECT * FROM Dobavljac";
                 comm = new SqlCommand(query, conn);
                 reader = comm.ExecuteReader();
@@ -49,6 +52,7 @@ namespace Data_Layer
                     Dobavljac db = new Dobavljac() { ID_Dobavljaca = reader.GetInt32(0), Naziv = reader.GetString(1), Adresa = reader.GetString(2) };
                     magacin.ListaDobavljaca.Add(db);
                 }
+                reader.Close();
                 query = "SELECT * FROM Dopremnica";
                 comm = new SqlCommand(query, conn);
                 reader = comm.ExecuteReader();
@@ -75,6 +79,7 @@ namespace Data_Layer
                     }
                     magacin.ListaDopremnica.Add(dp);
                 }
+                reader.Close();
                 query = "SELECT * FROM Narudzbina";
                 comm = new SqlCommand(query, conn);
                 reader = comm.ExecuteReader();
@@ -83,6 +88,7 @@ namespace Data_Layer
                     Narudzbina nr = new Narudzbina() { ID_Narudzbine = reader.GetInt32(0), Napomena = reader.GetString(1), Opis = reader.GetString(2), Datum = reader.GetDateTime(3)};
                     magacin.ListaNarudzbina.Add(nr);
                 }
+                reader.Close();
                 query = "SELECT * FROM Evidencija";
                 comm = new SqlCommand(query, conn);
                 reader = comm.ExecuteReader();
@@ -109,6 +115,44 @@ namespace Data_Layer
                     }
                     magacin.ListaEvidencija.Add(ev);
                 }
+                reader.Close();
+                
+                query = "SELECT * FROM Radnik";
+                comm = new SqlCommand(query, conn);
+                reader = comm.ExecuteReader();
+                List<Radnik> pomocnaLista = new List<Radnik>();
+                List<int> Rlista = new List<int>();
+                while (reader.Read())
+                {
+                    Radnik r = new Radnik() { ID_Radnika = reader.GetInt32(0), Ime = reader.GetString(1), Prezime = reader.GetString(2), Telefon = reader.GetString(3), JMBG = reader.GetString(4), Email = reader.GetString(5), Username = reader.GetString(7), Password = reader.GetString(8) };
+                    pomocnaLista.Add(r);
+                    Rlista.Add(reader.GetInt32(6));
+                }
+                int i = 0;
+                foreach(Radnik radnik in pomocnaLista)
+                {
+                    foreach (Radnik rukovodilac in pomocnaLista)
+                    {
+                        if(Rlista[i]==rukovodilac.ID_Radnika)
+                        {
+                            radnik.FK_Rukovodilac = rukovodilac;
+                            break;
+                        }
+                    }
+                    i++;
+                }
+                magacin.ListaRadnika = pomocnaLista;
+                reader.Close();
+
+                query = "SELECT * FROM Korisnik";
+                comm = new SqlCommand(query, conn);
+                reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    Korisnik k = new Korisnik() { ID_Korisnika=reader.GetInt32(0), Username=reader.GetString(1), Password=reader.GetString(2), Email=reader.GetString(3), Ime=reader.GetString(4), Prezime=reader.GetString(5), Telefon=reader.GetString(6), Role=reader.GetString(7)};
+                    magacin.ListaKorisnika.Add(k);
+                }
+                reader.Close();
                 return magacin;
             }
         }
@@ -117,11 +161,13 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
-                string query = "INSERT INTO Proizvod VALUES(@naziv, @opis, @id_proizvodjaca)";
+                conn.Open();
+                string query = "INSERT INTO Proizvod VALUES(@naziv, @opis, @id_proizvodjaca, @slika)";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@naziv", p.Naziv);
                 comm.Parameters.AddWithValue("@opis", p.Opis);
                 comm.Parameters.AddWithValue("@id_proizvodjaca", p.FK_Proizvodjac.ID_Proizvodjaca);
+                comm.Parameters.AddWithValue("@slika", p.Slika_Proizvoda);
                 return comm.ExecuteNonQuery();                
             }
         }
@@ -129,6 +175,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "INSERT INTO Proizvodjac VALUES(@naziv, @drzava, @adresa, @opis)";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@naziv", p.Naziv);
@@ -142,6 +189,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "INSERT INTO Dobavljac VALUES(@naziv, @adresa)";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@naziv", d.Naziv);
@@ -153,6 +201,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "INSERT INTO Dopremnica VALUES(@id_proizvoda, @id_dobavljaca)";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@id_proizvoda", d.FK_Proizvod.ID_Proizvoda);
@@ -164,6 +213,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "INSERT INTO Narudzbina VALUES(@napomena, @opis, @datum)";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@napomena", n.Napomena);
@@ -176,6 +226,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "INSERT INTO Evidencija VALUES(@opis, @napomena, @id_narudzbine, @id_proizvoda)";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@opis", e.Opis);
@@ -189,6 +240,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "INSERT INTO Radnik VALUES(@ime, @prezime, @telefon, @jmbg, @email, @id_rukovodioca, @username, @password)";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@ime", r.Ime);
@@ -206,6 +258,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "INSERT INTO Korisnik VALUES(@username, @password, @email, @ime, @prezime, @telefon, @role)";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@username", k.Username);
@@ -224,6 +277,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = string.Format("DELETE FROM Proizvod WHERE ID_Proizvoda = {0}", ID_Proizvoda);
                 SqlCommand comm = new SqlCommand(query, conn);
                 return comm.ExecuteNonQuery();
@@ -233,6 +287,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = string.Format("DELETE FROM Proizvodjac WHERE ID_Proizvodjaca = {0}", ID_Proizvodjaca);
                 SqlCommand comm = new SqlCommand(query, conn);
                 return comm.ExecuteNonQuery();
@@ -242,6 +297,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = string.Format("DELETE FROM Dobavljac WHERE ID_Dobavljaca = {0}", ID_Dobavljaca);
                 SqlCommand comm = new SqlCommand(query, conn);
                 return comm.ExecuteNonQuery();
@@ -251,6 +307,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = string.Format("DELETE FROM Dopremnica WHERE ID_Dopremnice = {0}", ID_Dopremnice);
                 SqlCommand comm = new SqlCommand(query, conn);
                 return comm.ExecuteNonQuery();
@@ -260,6 +317,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = string.Format("DELETE FROM Narudzbina WHERE ID_Narudzbine = {0}", ID_Narudzbine);
                 SqlCommand comm = new SqlCommand(query, conn);
                 return comm.ExecuteNonQuery();
@@ -269,6 +327,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = string.Format("DELETE FROM Evidencija WHERE ID_Narudzbine = {0} AND ID_Proizvoda = {1}", ID_Narudzbine, ID_Proizvoda);
                 SqlCommand comm = new SqlCommand(query, conn);
                 return comm.ExecuteNonQuery();
@@ -278,6 +337,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = string.Format("DELETE FROM Radnik WHERE ID_Radnika = {0}", ID_Radnika);
                 SqlCommand comm = new SqlCommand(query, conn);
                 return comm.ExecuteNonQuery();
@@ -287,6 +347,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = string.Format("DELETE FROM Korisnik WHERE ID_Korisnika = {0}", ID_Korisnika);
                 SqlCommand comm = new SqlCommand(query, conn);
                 return comm.ExecuteNonQuery();
@@ -298,12 +359,14 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
-                string query = "UPDATE Proizvod SET Naziv = @naziv, Opis = @opis, FK_ID_Proizvodjaca = @id_proizvodjaca WHERE ID_Proizvoda = @id";
+                conn.Open();
+                string query = "UPDATE Proizvod SET Naziv = @naziv, Opis = @opis, FK_ID_Proizvodjaca = @id_proizvodjaca, Slika_Proizvoda=@slika WHERE ID_Proizvoda = @id";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@naziv", p.Naziv);
                 comm.Parameters.AddWithValue("@opis", p.Opis);
                 comm.Parameters.AddWithValue("@id_proizvodjaca", p.FK_Proizvodjac.ID_Proizvodjaca);
                 comm.Parameters.AddWithValue("@id", ID);
+                comm.Parameters.AddWithValue("@slika", p.Slika_Proizvoda);
                 return comm.ExecuteNonQuery();
             }
         }
@@ -311,6 +374,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "UPDATE Proizvodjac SET Naziv = @naziv, Drzava = @drzava, Adresa = @adresa, Opis = @opis WHERE ID_Proizvodjaca = @id";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@naziv", p.Naziv);
@@ -325,6 +389,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "UPDATE Dobavljac SET Naziv = @naziv, Adresa = @adresa WHERE ID_Dobavljaca = @id";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@naziv", d.Naziv);
@@ -337,6 +402,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "UPDATE Dopremnica SET FK_ID_Proizvoda = @id_proizvoda, FK_ID_Dobavljaca = @id_dobavljaca WHERE ID_Dopremnice = @id";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@id_proizvoda", d.FK_Proizvod.ID_Proizvoda);
@@ -349,6 +415,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "UPDATE Narudzbina SET Napomena = @napomena, Opis = @opis, Datum = @datum WHERE ID_Narudzbine = @id";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@napomena", n.Napomena);
@@ -362,6 +429,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "UPDATE Evidencija SET Opis = @opis, Napomena = @napomena WHERE FK_ID_Narudzbine = @id1 AND FK_ID_Proizvoda = @id2";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@opis", e.Opis);
@@ -375,6 +443,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "UPDATE Radnik SET Ime = @ime, Prezime = @prezime, Telefon = @telefon, JMBG = @jmbg, Email = @email, FK_ID_Rukovodioca = @id_rukovodioca, Username = @username, Password = @password WHERE ID_Radnika = @id";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@ime", r.Ime);
@@ -393,6 +462,7 @@ namespace Data_Layer
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
+                conn.Open();
                 string query = "UPDATE Korisnik SET Username = @username, Password = @password, Email = @email, Ime = @ime, Prezime = @prezime, Telefon = @telefon, Role = @role WHERE ID_Korisnika = @id";
                 SqlCommand comm = new SqlCommand(query, conn);
                 comm.Parameters.AddWithValue("@username", k.Username);

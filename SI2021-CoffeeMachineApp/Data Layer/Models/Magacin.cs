@@ -16,5 +16,17 @@ namespace Data_Layer.Models
         public List<Evidencija> ListaEvidencija { get; set; }
         public List<Radnik> ListaRadnika { get; set; }
         public List<Korisnik> ListaKorisnika { get; set; }
+        public Magacin()
+        {
+            ListaProizvodjaca = new List<Proizvodjac>();
+            ListaProizvoda = new List<Proizvod>();
+            ListaDobavljaca = new List<Dobavljac>();
+            ListaDopremnica = new List<Dopremnica>();
+            ListaNarudzbina = new List<Narudzbina>();
+            ListaEvidencija = new List<Evidencija>();
+            ListaRadnika = new List<Radnik>();
+            ListaKorisnika = new List<Korisnik>();
+        }
     }
+
 }

@@ -12,5 +12,6 @@ namespace Data_Layer.Models
         public string Naziv { get; set; }
         public string Opis { get; set; }
         public Proizvodjac FK_Proizvodjac { get; set; }
+        public string Slika_Proizvoda { get; set; }
     }
 }
