@@ -69,5 +69,35 @@ namespace SI2021_CoffeeMachineApp
             PrikazKorisnika pk = new PrikazKorisnika(magacin);
             pk.ShowDialog();
         }
+
+        private void prikazDobavljačaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrikazDobavljaca pd = new PrikazDobavljaca(magacin);
+            pd.ShowDialog();
+        }
+
+        private void prikazDopremnicaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrikazDopremnice pd = new PrikazDopremnice(magacin);
+            pd.ShowDialog();
+        }
+
+        private void prikazNarudžbinaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrikazNarudzbine pn = new PrikazNarudzbine(magacin);
+            pn.ShowDialog();
+        }
+
+        private void prikazRadnikaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrikazRadnika pr = new PrikazRadnika(magacin);
+            pr.ShowDialog();
+        }
+
+        private void prikazEvidencijeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrikazEvidencije pe = new PrikazEvidencije(magacin);
+            pe.ShowDialog();
+        }
     }
 }

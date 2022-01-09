@@ -4,3 +4,9 @@ D:\Git\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\o
 D:\Git\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.csproj.CoreCompileInputs.cache
 D:\Git\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.dll
 D:\Git\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.pdb
+C:\Users\Korisnik\Desktop\GIIIT\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\bin\Debug\Data Layer.dll
+C:\Users\Korisnik\Desktop\GIIIT\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\bin\Debug\Data Layer.pdb
+C:\Users\Korisnik\Desktop\GIIIT\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.csproj.AssemblyReference.cache
+C:\Users\Korisnik\Desktop\GIIIT\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.csproj.CoreCompileInputs.cache
+C:\Users\Korisnik\Desktop\GIIIT\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.dll
+C:\Users\Korisnik\Desktop\GIIIT\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.pdb

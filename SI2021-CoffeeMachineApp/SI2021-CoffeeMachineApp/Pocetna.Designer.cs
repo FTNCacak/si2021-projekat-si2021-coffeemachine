@@ -101,24 +101,28 @@ namespace SI2021_CoffeeMachineApp
             this.prikazDobavljačaToolStripMenuItem.Name = "prikazDobavljačaToolStripMenuItem";
             this.prikazDobavljačaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.prikazDobavljačaToolStripMenuItem.Text = "Prikaz dobavljača";
+            this.prikazDobavljačaToolStripMenuItem.Click += new System.EventHandler(this.prikazDobavljačaToolStripMenuItem_Click);
             // 
             // prikazDopremnicaToolStripMenuItem
             // 
             this.prikazDopremnicaToolStripMenuItem.Name = "prikazDopremnicaToolStripMenuItem";
             this.prikazDopremnicaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.prikazDopremnicaToolStripMenuItem.Text = "Prikaz dopremnica";
+            this.prikazDopremnicaToolStripMenuItem.Click += new System.EventHandler(this.prikazDopremnicaToolStripMenuItem_Click);
             // 
             // prikazNarudžbinaToolStripMenuItem
             // 
             this.prikazNarudžbinaToolStripMenuItem.Name = "prikazNarudžbinaToolStripMenuItem";
             this.prikazNarudžbinaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.prikazNarudžbinaToolStripMenuItem.Text = "Prikaz narudžbina";
+            this.prikazNarudžbinaToolStripMenuItem.Click += new System.EventHandler(this.prikazNarudžbinaToolStripMenuItem_Click);
             // 
             // prikazEvidencijeToolStripMenuItem
             // 
             this.prikazEvidencijeToolStripMenuItem.Name = "prikazEvidencijeToolStripMenuItem";
             this.prikazEvidencijeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.prikazEvidencijeToolStripMenuItem.Text = "Prikaz evidencije";
+            this.prikazEvidencijeToolStripMenuItem.Click += new System.EventHandler(this.prikazEvidencijeToolStripMenuItem_Click);
             // 
             // prikazRadnikaToolStripMenuItem
             // 
@@ -126,6 +130,7 @@ namespace SI2021_CoffeeMachineApp
             this.prikazRadnikaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.prikazRadnikaToolStripMenuItem.Text = "Prikaz radnika";
             this.prikazRadnikaToolStripMenuItem.Visible = false;
+            this.prikazRadnikaToolStripMenuItem.Click += new System.EventHandler(this.prikazRadnikaToolStripMenuItem_Click);
             // 
             // prikazKorisnikaToolStripMenuItem
             // 

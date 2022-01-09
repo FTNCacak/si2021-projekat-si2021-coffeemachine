@@ -10,7 +10,7 @@ namespace Data_Layer
 {
     public class MagacinRepository
     {
-        private string ConnString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SI2021-CoffeeMachine;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string ConnString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SI2021-CoffeeMachineDataBase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public Magacin GetAllData()
         {
             Magacin magacin = new Magacin();
@@ -124,19 +124,27 @@ namespace Data_Layer
                 List<int> Rlista = new List<int>();
                 while (reader.Read())
                 {
-                    Radnik r = new Radnik() { ID_Radnika = reader.GetInt32(0), Ime = reader.GetString(1), Prezime = reader.GetString(2), Telefon = reader.GetString(3), JMBG = reader.GetString(4), Email = reader.GetString(5), Username = reader.GetString(7), Password = reader.GetString(8) };
+                    Radnik r = new Radnik() { ID_Radnika = reader.GetInt32(0), Ime = reader.GetString(1), Prezime = reader.GetString(2), Telefon = reader.GetString(3), JMBG = reader.GetString(4), Email = reader.GetString(5), Username = reader.GetString(7), Password = reader.GetString(8)};
                     pomocnaLista.Add(r);
-                    Rlista.Add(reader.GetInt32(6));
+                    if(!reader.IsDBNull(6))
+                        Rlista.Add(reader.GetInt32(6));
+                    else
+                        Rlista.Add(-1);
                 }
                 int i = 0;
                 foreach(Radnik radnik in pomocnaLista)
                 {
-                    foreach (Radnik rukovodilac in pomocnaLista)
+                    if (Rlista[i] == -1)
+                        radnik.FK_Rukovodilac = new Radnik() { Ime = "Ovaj radnik nema rukovodioca" };
+                    else
                     {
-                        if(Rlista[i]==rukovodilac.ID_Radnika)
+                        foreach (Radnik rukovodilac in pomocnaLista)
                         {
-                            radnik.FK_Rukovodilac = rukovodilac;
-                            break;
+                            if (Rlista[i] == rukovodilac.ID_Radnika)
+                            {
+                                radnik.FK_Rukovodilac = rukovodilac;
+                                break;
+                            }
                         }
                     }
                     i++;

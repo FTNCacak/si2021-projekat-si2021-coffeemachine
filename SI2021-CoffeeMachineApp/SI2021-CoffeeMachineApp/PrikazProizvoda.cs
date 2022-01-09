@@ -111,7 +111,7 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if (magacin.ListaKorisnika.Count > 1)
+            //if (magacin.ListaKorisnika.Count > 1)
                 dataGridView1.Rows.Add(magacin.ListaProizvoda.Count - 1);
             for (int i = 0; i < magacin.ListaProizvoda.Count; i++)
             {
@@ -145,6 +145,11 @@ namespace SI2021_CoffeeMachineApp
                 magacin.ListaProizvoda.RemoveAt(Row.Index);
             }
             Prikazi();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
