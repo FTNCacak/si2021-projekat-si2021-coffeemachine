@@ -146,11 +146,16 @@ namespace SI2021_CoffeeMachineApp
         {
             if (magacin.ListaProizvoda.Count <= 0)
                 return;
+            bool check2 = false;
             foreach (DataGridViewRow Row in dataGridView1.SelectedRows)
             {
                 int id = Convert.ToInt32(Row.Cells[1].Value.ToString());
-                br.DeleteProizvod(id);
-
+                if(!br.DeleteProizvod(id))
+                {
+                    check2 = false;
+                    break;
+                }
+                check2 = true;
                 string putanja = magacin.ListaProizvoda[Row.Index].Slika_Proizvoda;
                 bool check = false;
                 foreach(Proizvod proizvod in magacin.ListaProizvoda)
@@ -168,6 +173,10 @@ namespace SI2021_CoffeeMachineApp
                 
                 magacin.ListaProizvoda.RemoveAt(Row.Index);
             }
+            if (check2)
+                MessageBox.Show("Uspešno obrisani podaci!");
+            else
+                MessageBox.Show("Podaci nisu obrisani!");
             Prikazi();
         }
     }

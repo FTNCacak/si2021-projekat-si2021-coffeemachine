@@ -1,7 +1,4 @@
 ﻿using System;
-using Data_Layer;
-using Data_Layer.Models;
-using Business_Layer;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,23 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Data_Layer;
+using Data_Layer.Models;
+using Business_Layer;
 
 namespace SI2021_CoffeeMachineApp
 {
-    public partial class PrikazDobavljaca : Form
+    public partial class UpisDobavljaca : Form
     {
         public Magacin magacin { get; set; }
-        private int nacinSortiranja { get; set; }
         private readonly BusinessRepository br = new BusinessRepository();
-        public PrikazDobavljaca(Magacin magacin)
+        private int nacinSortiranja { get; set; }
+        public UpisDobavljaca(Magacin magacin)
         {
             this.magacin = magacin;
             InitializeComponent();
         }
 
-
-
-        private void PrikazDobavljaca_Load(object sender, EventArgs e)
+        private void UpisDobavljaca_Load(object sender, EventArgs e)
         {
             cbNacinSortiranja.SelectedIndex = 0;
             dataGridView1.Columns.Add("ID_Dobavljaca", "ID dobavljača");
@@ -41,7 +39,6 @@ namespace SI2021_CoffeeMachineApp
                 dataGridView1.Rows[i].Cells[2].Value = magacin.ListaDobavljaca[i].Adresa;
             }
         }
-
         private void Sort()
         {
             for (int i = 0; i < magacin.ListaDobavljaca.Count - 1; i++)
@@ -88,38 +85,93 @@ namespace SI2021_CoffeeMachineApp
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSortiraj_Click(object sender, EventArgs e)
         {
             Sort();
-            Prikazi();
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (magacin.ListaDobavljaca.Count <= 0)
-                return;
-            bool check = false;
-            foreach (DataGridViewRow Row in dataGridView1.SelectedRows)
-            {
-                int id = Convert.ToInt32(Row.Cells[0].Value.ToString());
-                if(!br.DeleteDobavljac(id))
-                {
-                    check = false;
-                    break;
-                }
-                check = true;
-                magacin.ListaDobavljaca.RemoveAt(Row.Index);
-            }
-            if (check)
-                MessageBox.Show("Uspešno obrisani podaci!");
-            else
-                MessageBox.Show("Podaci nisu obrisani!");
             Prikazi();
         }
 
         private void cbNacinSortiranja_SelectedIndexChanged(object sender, EventArgs e)
         {
             nacinSortiranja = cbNacinSortiranja.SelectedIndex;
+        }
+
+        private void btnUpisi_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (naziv.Text != "" && adresa.Text != "")
+                {
+                    Dobavljac d = new Dobavljac() { Naziv = naziv.Text, Adresa = adresa.Text };
+                    if (br.InsertDobavljac(d))
+                    {
+                        MessageBox.Show("Uspešno ste uneli dobavljača.");
+                        naziv.Text = "";
+                        adresa.Text = "";
+                        magacin = br.getData();
+                        Prikazi();
+                    }
+                    else
+                        MessageBox.Show("Dobavljač nije unet.");
+                }
+                else
+                {
+                    MessageBox.Show("Morate popuniti sve podatke na ispravan način kako bi uneli dobavlača!");
+                }
+            }
+            catch { MessageBox.Show("Podaci nisu ispravno uneti!"); }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (naziv.Text != "" && adresa.Text != "")
+                {
+                    if (dataGridView1.SelectedRows.Count != 0)
+                    {
+                        Dobavljac d = new Dobavljac() { Naziv = naziv.Text, Adresa = adresa.Text }; 
+                        bool check = false;
+                        foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                        {
+                            int ID = Convert.ToInt32(row.Cells[0].Value.ToString());
+                            if (br.UpdateDobavljac(ID, d))
+                            {
+                                check = true;
+                                naziv.Text = "";
+                                adresa.Text = "";
+                                magacin = br.getData();
+                                Prikazi();
+                            }
+                            else
+                            {
+                                check = false;
+                                break;
+                            }
+                        }
+                        if (check)
+                            MessageBox.Show("Uspešno ste ažurirali dobavljače.");
+                        else
+                            MessageBox.Show("Dobavljači nisu ažurirani.");
+                    }
+                    else
+                        MessageBox.Show("Morate odabrati dobavljače koje treba ažurirati kako bi ažurirali dobavljače!");
+
+                }
+                else
+                {
+                    MessageBox.Show("Morate popuniti sve podatke na ispravan način kako bi ažurirali dobavljače!");
+                }
+            }
+            catch { MessageBox.Show("Podaci nisu ispravno uneti!"); }
+        }
+
+        private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (magacin.ListaDobavljaca.Count <= 0)
+                return;
+            naziv.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            adresa.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
         }
     }
 }

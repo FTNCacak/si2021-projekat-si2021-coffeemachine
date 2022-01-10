@@ -21,8 +21,7 @@ namespace SI2021_CoffeeMachineApp
         private int nacinSortiranja { get; set; }
         private string putanjaDoSlike { get; set; } 
         private List<Proizvodjac> listaProizvodjaca = new List<Proizvodjac>();
-        private List<string> proizvodjacNaziv = new List<string>();
-        private List<string> slikaPutanja = new List<string>();
+        private List<int> listaSelektovanihProizvodjacID = new List<int>();
         private readonly BusinessRepository br = new BusinessRepository();
         public UpisProizvoda(Magacin magacin)
         {
@@ -55,8 +54,7 @@ namespace SI2021_CoffeeMachineApp
                 FKProizvodjac.Items.Add(proizvodjac.Naziv);
                 listaProizvodjaca.Add(proizvodjac);
             }
-            proizvodjacNaziv.Clear();
-            slikaPutanja.Clear();
+            listaSelektovanihProizvodjacID.Clear();
             DataGridViewImageColumn kolona = new DataGridViewImageColumn();
             kolona.HeaderText = "Slika proizvoda";
             kolona.ImageLayout = DataGridViewImageCellLayout.Zoom;
@@ -73,14 +71,15 @@ namespace SI2021_CoffeeMachineApp
             {
                 dataGridView1.Rows[i].Height = 50;
                 Bitmap pb = new Bitmap(magacin.ListaProizvoda[i].Slika_Proizvoda);
-                ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = pb;
+                Image slika = Image.FromHbitmap(pb.GetHbitmap());
+                ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = slika;
                 dataGridView1.Rows[i].Cells[1].Value = magacin.ListaProizvoda[i].ID_Proizvoda;
                 dataGridView1.Rows[i].Cells[2].Value = magacin.ListaProizvoda[i].Naziv;
                 dataGridView1.Rows[i].Cells[3].Value = magacin.ListaProizvoda[i].Cena;
                 dataGridView1.Rows[i].Cells[4].Value = magacin.ListaProizvoda[i].Opis;
                 dataGridView1.Rows[i].Cells[5].Value = magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv;
-                proizvodjacNaziv.Add(magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv);
-                slikaPutanja.Add(magacin.ListaProizvoda[i].Slika_Proizvoda);
+                listaSelektovanihProizvodjacID.Add(magacin.ListaProizvoda[i].FK_Proizvodjac.ID_Proizvodjaca);
+                pb.Dispose();
             }
         }
         private void Prikazi()
@@ -88,20 +87,20 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Rows.Clear();
             if (magacin.ListaProizvoda.Count > 1)
                 dataGridView1.Rows.Add(magacin.ListaProizvoda.Count - 1);
-            proizvodjacNaziv.Clear();
-            slikaPutanja.Clear();
+            listaSelektovanihProizvodjacID.Clear();
             for (int i = 0; i < magacin.ListaProizvoda.Count; i++)
             {
                 dataGridView1.Rows[i].Height = 50;
                 Bitmap pb = new Bitmap(magacin.ListaProizvoda[i].Slika_Proizvoda);
-                ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = pb;
+                Image slika = Image.FromHbitmap(pb.GetHbitmap());
+                ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = slika;
                 dataGridView1.Rows[i].Cells[1].Value = magacin.ListaProizvoda[i].ID_Proizvoda;
                 dataGridView1.Rows[i].Cells[2].Value = magacin.ListaProizvoda[i].Naziv;
                 dataGridView1.Rows[i].Cells[3].Value = magacin.ListaProizvoda[i].Cena;
                 dataGridView1.Rows[i].Cells[4].Value = magacin.ListaProizvoda[i].Opis;
                 dataGridView1.Rows[i].Cells[5].Value = magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv;
-                proizvodjacNaziv.Add(magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv);
-                slikaPutanja.Add(magacin.ListaProizvoda[i].Slika_Proizvoda);
+                listaSelektovanihProizvodjacID.Add(magacin.ListaProizvoda[i].FK_Proizvodjac.ID_Proizvodjaca);
+                pb.Dispose();
             }
         }
         private void Sort()
@@ -176,46 +175,52 @@ namespace SI2021_CoffeeMachineApp
 
         private void btnUpisi_Click(object sender, EventArgs e)
         {
-            if(naziv.Text!="" && opis.Text!="" && FKProizvodjac.SelectedIndex!=-1 && putanjaDoSlike != "" && cena.Text != "")
-            {
-                if (!File.Exists("../../Images/" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg"))
+            try { 
+                if(naziv.Text!="" && opis.Text!="" && FKProizvodjac.SelectedIndex!=-1 && putanjaDoSlike != "" && cena.Text != "")
                 {
-                    try
+                    if (!File.Exists("..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg"))
                     {
-                        Bitmap slika = new Bitmap(putanjaDoSlike);
-                        ImageCodecInfo myImageCodecInfo = GetEncoder(ImageFormat.Jpeg);
-                        System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                        EncoderParameter myEncoderParameter;
-                        EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                        try
+                        {
+                            Bitmap pb = new Bitmap(putanjaDoSlike);
+                            Image slika = Image.FromHbitmap(pb.GetHbitmap());
+                            pb.Dispose();
+                            ImageCodecInfo myImageCodecInfo = GetEncoder(ImageFormat.Jpeg);
+                            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                            EncoderParameter myEncoderParameter;
+                            EncoderParameters myEncoderParameters = new EncoderParameters(1);
 
-                        myEncoderParameter = new EncoderParameter(myEncoder, 100L);
-                        myEncoderParameters.Param[0] = myEncoderParameter;
-                        slika.Save("../../Images/" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg", myImageCodecInfo, myEncoderParameters);
-                        putanjaDoSlike = "../../Images/" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg";
+                            myEncoderParameter = new EncoderParameter(myEncoder, 100L);
+                            myEncoderParameters.Param[0] = myEncoderParameter;
+                            slika.Save("..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg", myImageCodecInfo, myEncoderParameters);
+                        }
+                        catch { return; }
                     }
-                    catch { MessageBox.Show("../../Images/" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg"); }
-                }
+                
+                    putanjaDoSlike = "..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg";
 
-                Proizvod p = new Proizvod() { Naziv = naziv.Text , Opis = opis.Text , FK_Proizvodjac = listaProizvodjaca[FKProizvodjac.SelectedIndex], Slika_Proizvoda = putanjaDoSlike, Cena = Convert.ToDecimal(cena.Text)};
-                if (br.InsertProizvod(p))
-                {
-                    MessageBox.Show("Uspešno ste uneli proizvod.");
-                    naziv.Text = "";
-                    opis.Text = "";
-                    cena.Text = "";
-                    FKProizvodjac.SelectedIndex = -1;
-                    putanjaDoSlike = "";
-                    pictureBox1.Image = null;
-                    magacin = br.getData();
-                    Prikazi();
+                    Proizvod p = new Proizvod() { Naziv = naziv.Text , Opis = opis.Text , FK_Proizvodjac = listaProizvodjaca[FKProizvodjac.SelectedIndex], Slika_Proizvoda = putanjaDoSlike, Cena = Convert.ToDecimal(cena.Text)};
+                    if (br.InsertProizvod(p))
+                    {
+                        MessageBox.Show("Uspešno ste uneli proizvod.");
+                        naziv.Text = "";
+                        opis.Text = "";
+                        cena.Text = "";
+                        FKProizvodjac.SelectedIndex = -1;
+                        putanjaDoSlike = "";
+                        pictureBox1.Image = null;
+                        magacin = br.getData();
+                        Prikazi();
+                    }
+                    else
+                        MessageBox.Show("Proizvod nije unet.");
                 }
                 else
-                    MessageBox.Show("Proizvod nije unet.");
+                {
+                    MessageBox.Show("Morate popuniti sve podatke na ispravan način kako bi uneli proizvod!");
+                }
             }
-            else
-            {
-                MessageBox.Show("Morate popuniti sve podatke na ispravan način kako bi uneli proizvod!");
-            }
+            catch { MessageBox.Show("Podaci nisu ispravno uneti!"); }
         }
         private ImageCodecInfo GetEncoder(ImageFormat format)
         {
@@ -232,67 +237,84 @@ namespace SI2021_CoffeeMachineApp
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (naziv.Text != "" && opis.Text != "" && FKProizvodjac.SelectedIndex != -1 && putanjaDoSlike != "" && cena.Text != "")
-            {
-                if (dataGridView1.SelectedRows.Count != 0)
+            try { 
+                if (naziv.Text != "" && opis.Text != "" && FKProizvodjac.SelectedIndex != -1 && putanjaDoSlike != "" && cena.Text != "")
                 {
-                    if (!File.Exists("../../Images/" + putanjaDoSlike.Split('\\').Last().Split('.')[0]+".jpg"))
+                    if (dataGridView1.SelectedRows.Count != 0)
                     {
-                        try
+                        if (!File.Exists("..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0]+".jpg"))
                         {
-                            Bitmap slika = new Bitmap(putanjaDoSlike);
-                            ImageCodecInfo myImageCodecInfo = GetEncoder(ImageFormat.Jpeg);
-                            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                            EncoderParameter myEncoderParameter;
-                            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                            try
+                            {
+                                Bitmap pb = new Bitmap(putanjaDoSlike);
+                                Image slika = Image.FromHbitmap(pb.GetHbitmap());
+                                pb.Dispose();
+                                ImageCodecInfo myImageCodecInfo = GetEncoder(ImageFormat.Jpeg);
+                                System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                                EncoderParameter myEncoderParameter;
+                                EncoderParameters myEncoderParameters = new EncoderParameters(1);
 
-                            myEncoderParameter = new EncoderParameter(myEncoder, 100L);
-                            myEncoderParameters.Param[0] = myEncoderParameter;
-                            slika.Save("../../Images/" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg", myImageCodecInfo, myEncoderParameters);
-                            putanjaDoSlike = "../../Images/" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg";
+                                myEncoderParameter = new EncoderParameter(myEncoder, 100L);
+                                myEncoderParameters.Param[0] = myEncoderParameter;
+                                slika.Save("..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg", myImageCodecInfo, myEncoderParameters);
+                                }
+                            catch { return; }
                         }
-                        catch { }
-                    }
+                        putanjaDoSlike = "..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg";
 
-                    Proizvod p = new Proizvod() { Naziv = naziv.Text, Opis = opis.Text, FK_Proizvodjac = listaProizvodjaca[FKProizvodjac.SelectedIndex], Slika_Proizvoda = putanjaDoSlike, Cena = Convert.ToDecimal(cena.Text) };
-
-                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                    {
-                        int ID = Convert.ToInt32(row.Cells[1].Value.ToString());
-                        if (br.UpdateProizvod(ID, p))
+                        Proizvod p = new Proizvod() { Naziv = naziv.Text, Opis = opis.Text, FK_Proizvodjac = listaProizvodjaca[FKProizvodjac.SelectedIndex], Slika_Proizvoda = putanjaDoSlike, Cena = Convert.ToDecimal(cena.Text) };
+                        bool check = false;
+                        foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                         {
+                            int ID = Convert.ToInt32(row.Cells[1].Value.ToString());
+                            if (br.UpdateProizvod(ID, p))
+                            {
+                                check = true;
+                                naziv.Text = "";
+                                opis.Text = "";
+                                cena.Text = "";
+                                FKProizvodjac.SelectedIndex = -1;
+                                putanjaDoSlike = "";
+                                pictureBox1.Image = null;
+                                magacin = br.getData();
+                                Prikazi();
+                            }
+                            else
+                            {
+                                check = false;
+                                break;
+                            }
+                        }
+                        if(check)
                             MessageBox.Show("Uspešno ste ažurirali proizvode.");
-                            naziv.Text = "";
-                            opis.Text = "";
-                            cena.Text = "";
-                            FKProizvodjac.SelectedIndex = -1;
-                            putanjaDoSlike = "";
-                            pictureBox1.Image = null;
-                            magacin = br.getData();
-                            Prikazi();
-                        }
                         else
-                            MessageBox.Show("Proizvod nije ažuriran.");
+                            MessageBox.Show("Proizvodi nisu ažurirani.");
                     }
+                    else
+                        MessageBox.Show("Morate odabrati proizvode koje treba ažurirati kako bi ažurirali proizvode!");
+
                 }
                 else
-                    MessageBox.Show("Morate odabrati proizvode koje treba ažurirati kako bi ažurirali proizvode!");
-
+                {
+                    MessageBox.Show("Morate popuniti sve podatke na ispravan način kako bi ažurirali proizvode!");
+                }
             }
-            else
-            {
-                MessageBox.Show("Morate popuniti sve podatke na ispravan način kako bi ažurirali proizvode!");
-            }
+            catch { MessageBox.Show("Podaci nisu ispravno uneti!"); }
         }
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (magacin.ListaProizvoda.Count <= 0)
+                return;
             naziv.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
             opis.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
             cena.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            FKProizvodjac.SelectedIndex = FKProizvodjac.FindString(proizvodjacNaziv[e.RowIndex].ToString());
-            putanjaDoSlike = slikaPutanja[e.RowIndex];
-            pictureBox1.Image = new Bitmap(slikaPutanja[e.RowIndex]);
+            FKProizvodjac.SelectedIndex = listaProizvodjaca.FindIndex(p => p.ID_Proizvodjaca == listaSelektovanihProizvodjacID[e.RowIndex]);
+            putanjaDoSlike = magacin.ListaProizvoda[e.RowIndex].Slika_Proizvoda;
+            Bitmap pb = new Bitmap(magacin.ListaProizvoda[e.RowIndex].Slika_Proizvoda);
+            Image slika = Image.FromHbitmap(pb.GetHbitmap());
+            pictureBox1.Image = slika;
+            pb.Dispose();
         }
     }
 }

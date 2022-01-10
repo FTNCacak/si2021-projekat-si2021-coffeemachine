@@ -180,5 +180,41 @@ namespace SI2021_CoffeeMachineApp
             prijaviSeToolStripMenuItem.Visible = true;
             lblWelcome.Text = "";
         }
+
+        private void upisProizvođačaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (UpisProizvodjaca up = new UpisProizvodjaca(magacin))
+            {
+                up.ShowDialog();
+                if (up.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = up.magacin;
+                }
+            }
+        }
+
+        private void upisToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (UpisDobavljaca ud = new UpisDobavljaca(magacin))
+            {
+                ud.ShowDialog();
+                if (ud.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = ud.magacin;
+                }
+            }
+        }
+
+        private void upisToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            using (UpisDopremnica ud = new UpisDopremnica(magacin))
+            {
+                ud.ShowDialog();
+                if (ud.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = ud.magacin;
+                }
+            }
+        }
     }
 }

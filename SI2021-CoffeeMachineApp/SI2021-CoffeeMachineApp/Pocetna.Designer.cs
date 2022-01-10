@@ -162,51 +162,54 @@ namespace SI2021_CoffeeMachineApp
             // upisProizvodaToolStripMenuItem
             // 
             this.upisProizvodaToolStripMenuItem.Name = "upisProizvodaToolStripMenuItem";
-            this.upisProizvodaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.upisProizvodaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.upisProizvodaToolStripMenuItem.Text = "Upis proizvoda";
             this.upisProizvodaToolStripMenuItem.Click += new System.EventHandler(this.upisProizvodaToolStripMenuItem_Click);
             // 
             // upisProizvođačaToolStripMenuItem
             // 
             this.upisProizvođačaToolStripMenuItem.Name = "upisProizvođačaToolStripMenuItem";
-            this.upisProizvođačaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.upisProizvođačaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.upisProizvođačaToolStripMenuItem.Text = "Upis proizvođača";
+            this.upisProizvođačaToolStripMenuItem.Click += new System.EventHandler(this.upisProizvođačaToolStripMenuItem_Click);
             // 
             // upisToolStripMenuItem1
             // 
             this.upisToolStripMenuItem1.Name = "upisToolStripMenuItem1";
-            this.upisToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.upisToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.upisToolStripMenuItem1.Text = "Upis dobavljača";
+            this.upisToolStripMenuItem1.Click += new System.EventHandler(this.upisToolStripMenuItem1_Click);
             // 
             // upisToolStripMenuItem2
             // 
             this.upisToolStripMenuItem2.Name = "upisToolStripMenuItem2";
-            this.upisToolStripMenuItem2.Size = new System.Drawing.Size(164, 22);
+            this.upisToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.upisToolStripMenuItem2.Text = "Upis dopremnica";
+            this.upisToolStripMenuItem2.Click += new System.EventHandler(this.upisToolStripMenuItem2_Click);
             // 
             // upisNarudžbinaToolStripMenuItem
             // 
             this.upisNarudžbinaToolStripMenuItem.Name = "upisNarudžbinaToolStripMenuItem";
-            this.upisNarudžbinaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.upisNarudžbinaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.upisNarudžbinaToolStripMenuItem.Text = "Upis narudžbina";
             // 
             // upisEvidencijaToolStripMenuItem
             // 
             this.upisEvidencijaToolStripMenuItem.Name = "upisEvidencijaToolStripMenuItem";
-            this.upisEvidencijaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.upisEvidencijaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.upisEvidencijaToolStripMenuItem.Text = "Upis evidencije";
             // 
             // upisRadnikaToolStripMenuItem
             // 
             this.upisRadnikaToolStripMenuItem.Name = "upisRadnikaToolStripMenuItem";
-            this.upisRadnikaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.upisRadnikaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.upisRadnikaToolStripMenuItem.Text = "Upis radnika";
             this.upisRadnikaToolStripMenuItem.Visible = false;
             // 
             // upisKorisnikaToolStripMenuItem
             // 
             this.upisKorisnikaToolStripMenuItem.Name = "upisKorisnikaToolStripMenuItem";
-            this.upisKorisnikaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.upisKorisnikaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.upisKorisnikaToolStripMenuItem.Text = "Upis korisnika";
             this.upisKorisnikaToolStripMenuItem.Visible = false;
             // 
