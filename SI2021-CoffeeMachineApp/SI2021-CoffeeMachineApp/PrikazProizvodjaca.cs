@@ -33,7 +33,8 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("Drzava", "Država u kojoj je proizvođač");
             dataGridView1.Columns.Add("Adresa", "Adresa proizvođača");
             dataGridView1.Columns.Add("Opis", "Opis proizvođača");
-            dataGridView1.Rows.Add(magacin.ListaProizvodjaca.Count);
+            if (magacin.ListaProizvodjaca.Count > 1)
+                dataGridView1.Rows.Add(magacin.ListaProizvodjaca.Count - 1);
             for (int i = 0; i < magacin.ListaProizvodjaca.Count; i++)
             {
                 dataGridView1.Rows[i].Cells[0].Value = magacin.ListaProizvodjaca[i].ID_Proizvodjaca;
@@ -45,9 +46,9 @@ namespace SI2021_CoffeeMachineApp
         }
         private void Sort()
         {
-            for (int i = 0; i < magacin.ListaProizvoda.Count - 1; i++)
+            for (int i = 0; i < magacin.ListaProizvodjaca.Count - 1; i++)
             {
-                for (int j = i; j < magacin.ListaProizvoda.Count; j++)
+                for (int j = i; j < magacin.ListaProizvodjaca.Count; j++)
                 {
                     if (nacinSortiranja == 0 && magacin.ListaProizvodjaca[i].Naziv.CompareTo(magacin.ListaProizvodjaca[j].Naziv) > 0)
                     {
@@ -79,7 +80,7 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if (magacin.ListaKorisnika.Count > 1)
+            if (magacin.ListaProizvodjaca.Count > 1)
                 dataGridView1.Rows.Add(magacin.ListaProizvodjaca.Count - 1);
             for (int i = 0; i < magacin.ListaProizvodjaca.Count; i++)
             {

@@ -40,6 +40,16 @@ namespace SI2021_CoffeeMachineApp
                         upisRadnikaToolStripMenuItem.Visible = true;
                         upisKorisnikaToolStripMenuItem.Visible = true;
                     }
+                    else
+                    {
+                        prikazRadnikaToolStripMenuItem.Visible = false;
+                        prikazKorisnikaToolStripMenuItem.Visible = false;
+                        upisRadnikaToolStripMenuItem.Visible = false;
+                        upisKorisnikaToolStripMenuItem.Visible = false;
+                    }
+                    odjaviSeToolStripMenuItem.Visible = true;
+                    prijaviSeToolStripMenuItem.Visible = false;
+                    lblWelcome.Text = "Dobrodošli, korisnik "+korisnik.Ime+" "+korisnik.Prezime;
                     BusinessRepository br = new BusinessRepository();
                     magacin = br.getData();
                 }
@@ -56,48 +66,119 @@ namespace SI2021_CoffeeMachineApp
 
         private void Pocetna_Load(object sender, EventArgs e)
         {
+            odjaviSeToolStripMenuItem.Visible = false;
+            prijaviSeToolStripMenuItem.Visible = true;
         }
 
         private void prikazProizvođačaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrikazProizvodjaca pp = new PrikazProizvodjaca(magacin);
-            pp.ShowDialog();
+            using (PrikazProizvodjaca pp = new PrikazProizvodjaca(magacin))
+            {
+                pp.ShowDialog();
+                if (pp.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = pp.magacin;
+                }
+            }
         }
 
         private void prikazKorisnikaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrikazKorisnika pk = new PrikazKorisnika(magacin);
-            pk.ShowDialog();
+            using (PrikazKorisnika pk = new PrikazKorisnika(magacin))
+            {
+                pk.ShowDialog();
+                if (pk.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = pk.magacin;
+                }
+            }
         }
 
         private void prikazDobavljačaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrikazDobavljaca pd = new PrikazDobavljaca(magacin);
-            pd.ShowDialog();
+            using (PrikazDobavljaca pd = new PrikazDobavljaca(magacin))
+            {
+                pd.ShowDialog();
+                if (pd.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = pd.magacin;
+                }
+            }
         }
 
         private void prikazDopremnicaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrikazDopremnice pd = new PrikazDopremnice(magacin);
-            pd.ShowDialog();
+            using (PrikazDopremnice pd = new PrikazDopremnice(magacin))
+            {
+                pd.ShowDialog();
+                if (pd.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = pd.magacin;
+                }
+            }
         }
 
         private void prikazNarudžbinaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrikazNarudzbine pn = new PrikazNarudzbine(magacin);
-            pn.ShowDialog();
+            using (PrikazNarudzbine pn = new PrikazNarudzbine(magacin))
+            {
+                pn.ShowDialog();
+                if (pn.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = pn.magacin;
+                }
+            }
         }
 
         private void prikazRadnikaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrikazRadnika pr = new PrikazRadnika(magacin);
-            pr.ShowDialog();
+            using (PrikazRadnika pr = new PrikazRadnika(magacin))
+            {
+                pr.ShowDialog();
+                if (pr.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = pr.magacin;
+                }
+            }
         }
 
         private void prikazEvidencijeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrikazEvidencije pe = new PrikazEvidencije(magacin);
-            pe.ShowDialog();
+            using (PrikazEvidencije pe = new PrikazEvidencije(magacin))
+            {
+                pe.ShowDialog();
+                if (pe.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = pe.magacin;
+                }
+            }
+        }
+
+        private void upisProizvodaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (UpisProizvoda up = new UpisProizvoda(magacin)) {
+                up.ShowDialog();
+                if(up.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = up.magacin;
+                }
+            }
+        }
+
+        private void odjaviSeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            korisnik = new Korisnik();
+            magacin = new Magacin();
+            menuStrip1.Items[0].Enabled = false;
+            menuStrip1.Items[1].Enabled = false;
+            prikazRadnikaToolStripMenuItem.Visible = false;
+            prikazKorisnikaToolStripMenuItem.Visible = false;
+            upisRadnikaToolStripMenuItem.Visible = false;
+            upisKorisnikaToolStripMenuItem.Visible = false;
+
+            odjaviSeToolStripMenuItem.Visible = false;
+            prijaviSeToolStripMenuItem.Visible = true;
+            lblWelcome.Text = "";
         }
     }
 }

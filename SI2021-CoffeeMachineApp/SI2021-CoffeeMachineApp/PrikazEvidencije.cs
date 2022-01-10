@@ -30,7 +30,8 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("Napomena", "Napomena");
             dataGridView1.Columns.Add("FK_ID_Narudzbine", "ID narudžbine");
             dataGridView1.Columns.Add("FK_ID_Proizvoda", "Naziv proizvoda");
-            dataGridView1.Rows.Add(magacin.ListaEvidencija.Count);
+            if (magacin.ListaEvidencija.Count > 1)
+                dataGridView1.Rows.Add(magacin.ListaEvidencija.Count - 1);
             for (int i = 0; i < magacin.ListaEvidencija.Count; i++)
             {
                 dataGridView1.Rows[i].Cells[0].Value = magacin.ListaEvidencija[i].Opis;
@@ -75,8 +76,8 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            //if (magacin.ListaKorisnika.Count > 1)
-            dataGridView1.Rows.Add(magacin.ListaEvidencija.Count - 1);
+            if (magacin.ListaEvidencija.Count > 1)
+                dataGridView1.Rows.Add(magacin.ListaEvidencija.Count - 1);
             for (int i = 0; i < magacin.ListaEvidencija.Count; i++)
             {
                 dataGridView1.Rows[i].Cells[0].Value = magacin.ListaEvidencija[i].Opis;

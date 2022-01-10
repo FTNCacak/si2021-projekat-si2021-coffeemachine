@@ -50,6 +50,8 @@ namespace SI2021_CoffeeMachineApp
             this.upisKorisnikaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.webFormaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prijaviSeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.odjaviSeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +61,8 @@ namespace SI2021_CoffeeMachineApp
             this.prikazToolStripMenuItem,
             this.upisToolStripMenuItem,
             this.webFormaToolStripMenuItem,
-            this.prijaviSeToolStripMenuItem});
+            this.prijaviSeToolStripMenuItem,
+            this.odjaviSeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -85,49 +88,49 @@ namespace SI2021_CoffeeMachineApp
             // prikazProizvodaToolStripMenuItem
             // 
             this.prikazProizvodaToolStripMenuItem.Name = "prikazProizvodaToolStripMenuItem";
-            this.prikazProizvodaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.prikazProizvodaToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.prikazProizvodaToolStripMenuItem.Text = "Prikaz proizvoda";
             this.prikazProizvodaToolStripMenuItem.Click += new System.EventHandler(this.prikazProizvodaToolStripMenuItem_Click);
             // 
             // prikazProizvođačaToolStripMenuItem
             // 
             this.prikazProizvođačaToolStripMenuItem.Name = "prikazProizvođačaToolStripMenuItem";
-            this.prikazProizvođačaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.prikazProizvođačaToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.prikazProizvođačaToolStripMenuItem.Text = "Prikaz proizvođača";
             this.prikazProizvođačaToolStripMenuItem.Click += new System.EventHandler(this.prikazProizvođačaToolStripMenuItem_Click);
             // 
             // prikazDobavljačaToolStripMenuItem
             // 
             this.prikazDobavljačaToolStripMenuItem.Name = "prikazDobavljačaToolStripMenuItem";
-            this.prikazDobavljačaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.prikazDobavljačaToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.prikazDobavljačaToolStripMenuItem.Text = "Prikaz dobavljača";
             this.prikazDobavljačaToolStripMenuItem.Click += new System.EventHandler(this.prikazDobavljačaToolStripMenuItem_Click);
             // 
             // prikazDopremnicaToolStripMenuItem
             // 
             this.prikazDopremnicaToolStripMenuItem.Name = "prikazDopremnicaToolStripMenuItem";
-            this.prikazDopremnicaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.prikazDopremnicaToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.prikazDopremnicaToolStripMenuItem.Text = "Prikaz dopremnica";
             this.prikazDopremnicaToolStripMenuItem.Click += new System.EventHandler(this.prikazDopremnicaToolStripMenuItem_Click);
             // 
             // prikazNarudžbinaToolStripMenuItem
             // 
             this.prikazNarudžbinaToolStripMenuItem.Name = "prikazNarudžbinaToolStripMenuItem";
-            this.prikazNarudžbinaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.prikazNarudžbinaToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.prikazNarudžbinaToolStripMenuItem.Text = "Prikaz narudžbina";
             this.prikazNarudžbinaToolStripMenuItem.Click += new System.EventHandler(this.prikazNarudžbinaToolStripMenuItem_Click);
             // 
             // prikazEvidencijeToolStripMenuItem
             // 
             this.prikazEvidencijeToolStripMenuItem.Name = "prikazEvidencijeToolStripMenuItem";
-            this.prikazEvidencijeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.prikazEvidencijeToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.prikazEvidencijeToolStripMenuItem.Text = "Prikaz evidencije";
             this.prikazEvidencijeToolStripMenuItem.Click += new System.EventHandler(this.prikazEvidencijeToolStripMenuItem_Click);
             // 
             // prikazRadnikaToolStripMenuItem
             // 
             this.prikazRadnikaToolStripMenuItem.Name = "prikazRadnikaToolStripMenuItem";
-            this.prikazRadnikaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.prikazRadnikaToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.prikazRadnikaToolStripMenuItem.Text = "Prikaz radnika";
             this.prikazRadnikaToolStripMenuItem.Visible = false;
             this.prikazRadnikaToolStripMenuItem.Click += new System.EventHandler(this.prikazRadnikaToolStripMenuItem_Click);
@@ -135,7 +138,7 @@ namespace SI2021_CoffeeMachineApp
             // prikazKorisnikaToolStripMenuItem
             // 
             this.prikazKorisnikaToolStripMenuItem.Name = "prikazKorisnikaToolStripMenuItem";
-            this.prikazKorisnikaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.prikazKorisnikaToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.prikazKorisnikaToolStripMenuItem.Text = "Prikaz korisnika";
             this.prikazKorisnikaToolStripMenuItem.Visible = false;
             this.prikazKorisnikaToolStripMenuItem.Click += new System.EventHandler(this.prikazKorisnikaToolStripMenuItem_Click);
@@ -161,6 +164,7 @@ namespace SI2021_CoffeeMachineApp
             this.upisProizvodaToolStripMenuItem.Name = "upisProizvodaToolStripMenuItem";
             this.upisProizvodaToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.upisProizvodaToolStripMenuItem.Text = "Upis proizvoda";
+            this.upisProizvodaToolStripMenuItem.Click += new System.EventHandler(this.upisProizvodaToolStripMenuItem_Click);
             // 
             // upisProizvođačaToolStripMenuItem
             // 
@@ -219,11 +223,28 @@ namespace SI2021_CoffeeMachineApp
             this.prijaviSeToolStripMenuItem.Text = "Prijavi se";
             this.prijaviSeToolStripMenuItem.Click += new System.EventHandler(this.prijaviSeToolStripMenuItem_Click);
             // 
+            // odjaviSeToolStripMenuItem
+            // 
+            this.odjaviSeToolStripMenuItem.Name = "odjaviSeToolStripMenuItem";
+            this.odjaviSeToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.odjaviSeToolStripMenuItem.Text = "Odjavi se";
+            this.odjaviSeToolStripMenuItem.Click += new System.EventHandler(this.odjaviSeToolStripMenuItem_Click);
+            // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(134, 97);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(0, 39);
+            this.lblWelcome.TabIndex = 1;
+            // 
             // Pocetna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Pocetna";
@@ -259,6 +280,8 @@ namespace SI2021_CoffeeMachineApp
         private System.Windows.Forms.ToolStripMenuItem upisKorisnikaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem webFormaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem prijaviSeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem odjaviSeToolStripMenuItem;
+        private System.Windows.Forms.Label lblWelcome;
     }
 }
 

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace SI2021_CoffeeMachineApp
 {
@@ -37,17 +38,20 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("Cena", "Cena proizvoda");
             dataGridView1.Columns.Add("Opis", "Opis proizvoda");
             dataGridView1.Columns.Add("FK_ID_Proizvodjaca", "Proizvođač");
-            dataGridView1.Rows.Add(magacin.ListaProizvoda.Count-1);
+            if (magacin.ListaProizvoda.Count > 1)
+                dataGridView1.Rows.Add(magacin.ListaProizvoda.Count - 1);
             for (int i = 0; i < magacin.ListaProizvoda.Count; i++)
             {
                 dataGridView1.Rows[i].Height = 50;
                 Bitmap pb = new Bitmap(magacin.ListaProizvoda[i].Slika_Proizvoda);
-                ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = pb;
+                Image slika = Image.FromHbitmap(pb.GetHbitmap());
+                ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = slika;
                 dataGridView1.Rows[i].Cells[1].Value = magacin.ListaProizvoda[i].ID_Proizvoda;
                 dataGridView1.Rows[i].Cells[2].Value = magacin.ListaProizvoda[i].Naziv;
                 dataGridView1.Rows[i].Cells[3].Value = magacin.ListaProizvoda[i].Cena;
                 dataGridView1.Rows[i].Cells[4].Value = magacin.ListaProizvoda[i].Opis;
                 dataGridView1.Rows[i].Cells[5].Value = magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv;
+                pb.Dispose();
             }
         }
         private void Sort()
@@ -111,18 +115,20 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            //if (magacin.ListaKorisnika.Count > 1)
+            if (magacin.ListaProizvoda.Count > 1)
                 dataGridView1.Rows.Add(magacin.ListaProizvoda.Count - 1);
             for (int i = 0; i < magacin.ListaProizvoda.Count; i++)
             {
                 dataGridView1.Rows[i].Height = 50;
                 Bitmap pb = new Bitmap(magacin.ListaProizvoda[i].Slika_Proizvoda);
-                ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = pb;
+                Image slika = Image.FromHbitmap(pb.GetHbitmap());
+                ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = slika;
                 dataGridView1.Rows[i].Cells[1].Value = magacin.ListaProizvoda[i].ID_Proizvoda;
                 dataGridView1.Rows[i].Cells[2].Value = magacin.ListaProizvoda[i].Naziv;
                 dataGridView1.Rows[i].Cells[3].Value = magacin.ListaProizvoda[i].Cena;
                 dataGridView1.Rows[i].Cells[4].Value = magacin.ListaProizvoda[i].Opis;
                 dataGridView1.Rows[i].Cells[5].Value = magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv;
+                pb.Dispose();
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -138,18 +144,31 @@ namespace SI2021_CoffeeMachineApp
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (magacin.ListaProizvoda.Count <= 0)
+                return;
             foreach (DataGridViewRow Row in dataGridView1.SelectedRows)
             {
                 int id = Convert.ToInt32(Row.Cells[1].Value.ToString());
                 br.DeleteProizvod(id);
+
+                string putanja = magacin.ListaProizvoda[Row.Index].Slika_Proizvoda;
+                bool check = false;
+                foreach(Proizvod proizvod in magacin.ListaProizvoda)
+                {
+                    if(proizvod.Slika_Proizvoda.Equals(putanja) && proizvod.ID_Proizvoda != id)
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+                if (!check)
+                {
+                    File.Delete(putanja);
+                }
+                
                 magacin.ListaProizvoda.RemoveAt(Row.Index);
             }
             Prikazi();
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

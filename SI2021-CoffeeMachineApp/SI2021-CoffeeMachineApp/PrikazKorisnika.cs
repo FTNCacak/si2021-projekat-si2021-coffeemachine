@@ -35,7 +35,8 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("Prezime", "Prezime korisnika");
             dataGridView1.Columns.Add("Telefon", "Telefon korisnika");
             dataGridView1.Columns.Add("Role", "Uloga korisnika");
-            dataGridView1.Rows.Add(magacin.ListaKorisnika.Count);
+            if (magacin.ListaKorisnika.Count > 1)
+                dataGridView1.Rows.Add(magacin.ListaKorisnika.Count - 1);
             for (int i = 0; i < magacin.ListaKorisnika.Count; i++)
             {
                 dataGridView1.Rows[i].Cells[0].Value = magacin.ListaKorisnika[i].ID_Korisnika;
@@ -105,7 +106,7 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if(magacin.ListaKorisnika.Count>1)
+            if (magacin.ListaKorisnika.Count > 1)
                 dataGridView1.Rows.Add(magacin.ListaKorisnika.Count - 1);
             for (int i = 0; i < magacin.ListaKorisnika.Count; i++)
             {
