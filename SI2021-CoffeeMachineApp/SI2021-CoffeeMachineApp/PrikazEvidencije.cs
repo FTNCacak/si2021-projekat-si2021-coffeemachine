@@ -111,8 +111,8 @@ namespace SI2021_CoffeeMachineApp
                     check = false;
                     break;
                 }
-                magacin.ListaEvidencija.RemoveAt(Row.Index);
             }
+            magacin = br.getData();
             if (check)
                 MessageBox.Show("Uspešno obrisani podaci!");
             else

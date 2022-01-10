@@ -145,8 +145,8 @@ namespace SI2021_CoffeeMachineApp
                     break;
                 }
                 check = true;
-                magacin.ListaKorisnika.RemoveAt(Row.Index);
             }
+            magacin = br.getData();
             if (check)
                 MessageBox.Show("Uspešno obrisani podaci!");
             else

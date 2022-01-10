@@ -170,9 +170,9 @@ namespace SI2021_CoffeeMachineApp
                 {
                     File.Delete(putanja);
                 }
-                
-                magacin.ListaProizvoda.RemoveAt(Row.Index);
+
             }
+            magacin = br.getData();
             if (check2)
                 MessageBox.Show("Uspešno obrisani podaci!");
             else
