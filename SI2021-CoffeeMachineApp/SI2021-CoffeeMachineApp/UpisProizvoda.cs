@@ -35,7 +35,9 @@ namespace SI2021_CoffeeMachineApp
             dialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
             if(dialog.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.Image = new Bitmap(dialog.FileName);
+                Bitmap pb = new Bitmap(dialog.FileName);
+                Image slika = Image.FromHbitmap(pb.GetHbitmap());
+                pictureBox1.Image = slika;
                 putanjaDoSlike = dialog.FileName;
             }
             else
@@ -194,9 +196,22 @@ namespace SI2021_CoffeeMachineApp
                             myEncoderParameters.Param[0] = myEncoderParameter;
                             slika.Save("..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg", myImageCodecInfo, myEncoderParameters);
                         }
-                        catch { return; }
+                        catch
+                        {
+                            MessageBox.Show("Nije uspelo dodavanje nove slike za proizvod!");
+                            pictureBox1.Image = null;
+                            putanjaDoSlike = "";
+                            return;
+                        }
                     }
-                
+                    else
+                    {
+                        MessageBox.Show("Slika pod ovim nazivom već postoji! Pokušajte da promenite naziv izvorne slike, ili da dodate drugu sliku proizvoda.");
+                        pictureBox1.Image = null;
+                        putanjaDoSlike = "";
+                        return;
+                    }
+
                     putanjaDoSlike = "..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg";
 
                     Proizvod p = new Proizvod() { Naziv = naziv.Text , Opis = opis.Text , FK_Proizvodjac = listaProizvodjaca[FKProizvodjac.SelectedIndex], Slika_Proizvoda = putanjaDoSlike, Cena = Convert.ToDecimal(cena.Text)};
@@ -242,7 +257,7 @@ namespace SI2021_CoffeeMachineApp
                 {
                     if (dataGridView1.SelectedRows.Count != 0)
                     {
-                        if (!File.Exists("..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0]+".jpg"))
+                        if (!File.Exists("..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg"))
                         {
                             try
                             {
@@ -257,9 +272,23 @@ namespace SI2021_CoffeeMachineApp
                                 myEncoderParameter = new EncoderParameter(myEncoder, 100L);
                                 myEncoderParameters.Param[0] = myEncoderParameter;
                                 slika.Save("..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg", myImageCodecInfo, myEncoderParameters);
-                                }
-                            catch { return; }
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Nije uspelo dodavanje nove slike za proizvod!");
+                                pictureBox1.Image = null;
+                                putanjaDoSlike = "";
+                                return;
+                            }
                         }
+                        else
+                        {
+                            MessageBox.Show("Slika pod ovim nazivom već postoji! Pokušajte da promenite naziv izvorne slike, ili da dodate drugu sliku proizvoda.");
+                            pictureBox1.Image = null;
+                            putanjaDoSlike = "";
+                            return;
+                        }
+
                         putanjaDoSlike = "..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg";
 
                         Proizvod p = new Proizvod() { Naziv = naziv.Text, Opis = opis.Text, FK_Proizvodjac = listaProizvodjaca[FKProizvodjac.SelectedIndex], Slika_Proizvoda = putanjaDoSlike, Cena = Convert.ToDecimal(cena.Text) };
