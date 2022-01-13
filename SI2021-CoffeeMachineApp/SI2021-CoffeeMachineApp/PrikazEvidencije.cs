@@ -15,12 +15,11 @@ namespace SI2021_CoffeeMachineApp
 {
     public partial class PrikazEvidencije : Form
     {
-        public Magacin magacin { get; set; }
         private int nacinSortiranja { get; set; }
-        private readonly BusinessRepository br = new BusinessRepository();
-        public PrikazEvidencije(Magacin magacin)
+        private readonly BusinessRepository br;
+        public PrikazEvidencije(BusinessRepository br)
         {
-            this.magacin = magacin;
+            this.br = br;
             InitializeComponent();
         }
         private void PrikazEvidencije_Load(object sender, EventArgs e)
@@ -30,45 +29,45 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("Napomena", "Napomena");
             dataGridView1.Columns.Add("FK_ID_Narudzbine", "ID narudžbine");
             dataGridView1.Columns.Add("FK_ID_Proizvoda", "Naziv proizvoda");
-            if (magacin.ListaEvidencija.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaEvidencija.Count - 1);
-            for (int i = 0; i < magacin.ListaEvidencija.Count; i++)
+            if (br.magacin.ListaEvidencija.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaEvidencija.Count - 1);
+            for (int i = 0; i < br.magacin.ListaEvidencija.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaEvidencija[i].Opis;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaEvidencija[i].Napomena;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaEvidencija[i].FK_Proizvod.Naziv;
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaEvidencija[i].Opis;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaEvidencija[i].Napomena;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaEvidencija[i].FK_Proizvod.Naziv;
             }
         }
         private void Sort()
         {
-            for (int i = 0; i < magacin.ListaEvidencija.Count - 1; i++)
+            for (int i = 0; i < br.magacin.ListaEvidencija.Count - 1; i++)
             {
-                for (int j = i; j < magacin.ListaEvidencija.Count; j++)
+                for (int j = i; j < br.magacin.ListaEvidencija.Count; j++)
                 {
-                    if (nacinSortiranja == 0 && magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine.CompareTo(magacin.ListaEvidencija[j].FK_Narudzbina.ID_Narudzbine) > 0)
+                    if (nacinSortiranja == 0 && br.magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine.CompareTo(br.magacin.ListaEvidencija[j].FK_Narudzbina.ID_Narudzbine) > 0)
                     {
-                        Evidencija pom = magacin.ListaEvidencija[i];
-                        magacin.ListaEvidencija[i] = magacin.ListaEvidencija[j];
-                        magacin.ListaEvidencija[j] = pom;
+                        Evidencija pom = br.magacin.ListaEvidencija[i];
+                        br.magacin.ListaEvidencija[i] = br.magacin.ListaEvidencija[j];
+                        br.magacin.ListaEvidencija[j] = pom;
                     }
-                    else if (nacinSortiranja == 0 && magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine.CompareTo(magacin.ListaEvidencija[j].FK_Narudzbina.ID_Narudzbine) < 0)
+                    else if (nacinSortiranja == 0 && br.magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine.CompareTo(br.magacin.ListaEvidencija[j].FK_Narudzbina.ID_Narudzbine) < 0)
                     {
-                        Evidencija pom = magacin.ListaEvidencija[i];
-                        magacin.ListaEvidencija[i] = magacin.ListaEvidencija[j];
-                        magacin.ListaEvidencija[j] = pom;
+                        Evidencija pom = br.magacin.ListaEvidencija[i];
+                        br.magacin.ListaEvidencija[i] = br.magacin.ListaEvidencija[j];
+                        br.magacin.ListaEvidencija[j] = pom;
                     }
-                    else if (nacinSortiranja == 2 && magacin.ListaEvidencija[i].FK_Proizvod.Naziv.CompareTo(magacin.ListaEvidencija[j].FK_Proizvod.Naziv) < 0)
+                    else if (nacinSortiranja == 2 && br.magacin.ListaEvidencija[i].FK_Proizvod.Naziv.CompareTo(br.magacin.ListaEvidencija[j].FK_Proizvod.Naziv) < 0)
                     {
-                        Evidencija pom = magacin.ListaEvidencija[i];
-                        magacin.ListaEvidencija[i] = magacin.ListaEvidencija[j];
-                        magacin.ListaEvidencija[j] = pom;
+                        Evidencija pom = br.magacin.ListaEvidencija[i];
+                        br.magacin.ListaEvidencija[i] = br.magacin.ListaEvidencija[j];
+                        br.magacin.ListaEvidencija[j] = pom;
                     }
-                    else if (nacinSortiranja == 3 && magacin.ListaEvidencija[i].FK_Proizvod.Naziv.CompareTo(magacin.ListaEvidencija[j].FK_Proizvod.Naziv) < 0)
+                    else if (nacinSortiranja == 3 && br.magacin.ListaEvidencija[i].FK_Proizvod.Naziv.CompareTo(br.magacin.ListaEvidencija[j].FK_Proizvod.Naziv) < 0)
                     {
-                        Evidencija pom = magacin.ListaEvidencija[i];
-                        magacin.ListaEvidencija[i] = magacin.ListaEvidencija[j];
-                        magacin.ListaEvidencija[j] = pom;
+                        Evidencija pom = br.magacin.ListaEvidencija[i];
+                        br.magacin.ListaEvidencija[i] = br.magacin.ListaEvidencija[j];
+                        br.magacin.ListaEvidencija[j] = pom;
                     }
                 }
             }
@@ -76,14 +75,14 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if (magacin.ListaEvidencija.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaEvidencija.Count - 1);
-            for (int i = 0; i < magacin.ListaEvidencija.Count; i++)
+            if (br.magacin.ListaEvidencija.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaEvidencija.Count - 1);
+            for (int i = 0; i < br.magacin.ListaEvidencija.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaEvidencija[i].Opis;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaEvidencija[i].Napomena;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaEvidencija[i].FK_Proizvod.Naziv;
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaEvidencija[i].Opis;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaEvidencija[i].Napomena;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaEvidencija[i].FK_Proizvod.Naziv;
             }
         }
 
@@ -100,7 +99,7 @@ namespace SI2021_CoffeeMachineApp
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (magacin.ListaEvidencija.Count <= 0)
+            if (br.magacin.ListaEvidencija.Count <= 0)
                 return;
             bool check = false;
             foreach (DataGridViewRow Row in dataGridView1.SelectedRows)
@@ -112,7 +111,7 @@ namespace SI2021_CoffeeMachineApp
                     break;
                 }
             }
-            magacin = br.getData();
+            br.magacin = br.getData();
             if (check)
                 MessageBox.Show("Uspešno obrisani podaci!");
             else

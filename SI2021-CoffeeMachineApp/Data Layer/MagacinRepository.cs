@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Data_Layer.Models;
+using Data_Layer.Interfaces;
 
 namespace Data_Layer
 {
-    public class MagacinRepository
+    public class MagacinRepository:IMagacinRepository
     {
         private string ConnString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SI2021-CoffeeMachineDataBase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public Magacin GetAllData()

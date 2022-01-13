@@ -15,20 +15,19 @@ namespace SI2021_CoffeeMachineApp
 {
     public partial class UpisRadnika : Form
     {
-        public Magacin magacin { get; set; }
-        private readonly BusinessRepository br = new BusinessRepository();
+        private readonly BusinessRepository br;
         private List<Radnik> listaRukovodilaca = new List<Radnik>();
         private List<int> listaSelektovanihRukovodilacID = new List<int>();
         private int nacinSortiranja { get; set; }
-        public UpisRadnika(Magacin magacin)
+        public UpisRadnika(BusinessRepository br)
         {
-            this.magacin = magacin;
+            this.br = br;
             InitializeComponent();
         }
 
         private void UpisRadnika_Load(object sender, EventArgs e)
         {
-            foreach(Radnik rukovodilac in magacin.ListaRadnika)
+            foreach(Radnik rukovodilac in br.magacin.ListaRadnika)
             {
                 FKRukovodilac.Items.Add(rukovodilac.Ime);
                 listaRukovodilaca.Add(rukovodilac);
@@ -44,65 +43,65 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("FK_ID_Rukovodioca", "Ime rukovodioca");
             dataGridView1.Columns.Add("Username", "Username");
             dataGridView1.Columns.Add("Password", "Password");
-            if (magacin.ListaRadnika.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaRadnika.Count - 1);
-            for (int i = 0; i < magacin.ListaRadnika.Count; i++)
+            if (br.magacin.ListaRadnika.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaRadnika.Count - 1);
+            for (int i = 0; i < br.magacin.ListaRadnika.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaRadnika[i].ID_Radnika;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaRadnika[i].Ime;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaRadnika[i].Prezime;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaRadnika[i].Telefon;
-                dataGridView1.Rows[i].Cells[4].Value = magacin.ListaRadnika[i].JMBG;
-                dataGridView1.Rows[i].Cells[5].Value = magacin.ListaRadnika[i].Email;
-                dataGridView1.Rows[i].Cells[6].Value = magacin.ListaRadnika[i].FK_Rukovodilac.Ime;
-                dataGridView1.Rows[i].Cells[7].Value = magacin.ListaRadnika[i].Username;
-                dataGridView1.Rows[i].Cells[8].Value = magacin.ListaRadnika[i].Password;
-                listaSelektovanihRukovodilacID.Add(magacin.ListaRadnika[i].FK_Rukovodilac.ID_Radnika);
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaRadnika[i].ID_Radnika;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaRadnika[i].Ime;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaRadnika[i].Prezime;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaRadnika[i].Telefon;
+                dataGridView1.Rows[i].Cells[4].Value = br.magacin.ListaRadnika[i].JMBG;
+                dataGridView1.Rows[i].Cells[5].Value = br.magacin.ListaRadnika[i].Email;
+                dataGridView1.Rows[i].Cells[6].Value = br.magacin.ListaRadnika[i].FK_Rukovodilac.Ime;
+                dataGridView1.Rows[i].Cells[7].Value = br.magacin.ListaRadnika[i].Username;
+                dataGridView1.Rows[i].Cells[8].Value = br.magacin.ListaRadnika[i].Password;
+                listaSelektovanihRukovodilacID.Add(br.magacin.ListaRadnika[i].FK_Rukovodilac.ID_Radnika);
             }
         }
         private void Sort()
         {
-            for (int i = 0; i < magacin.ListaRadnika.Count - 1; i++)
+            for (int i = 0; i < br.magacin.ListaRadnika.Count - 1; i++)
             {
-                for (int j = i; j < magacin.ListaRadnika.Count; j++)
+                for (int j = i; j < br.magacin.ListaRadnika.Count; j++)
                 {
-                    if (nacinSortiranja == 0 && magacin.ListaRadnika[i].Ime.CompareTo(magacin.ListaRadnika[j].Ime) > 0)
+                    if (nacinSortiranja == 0 && br.magacin.ListaRadnika[i].Ime.CompareTo(br.magacin.ListaRadnika[j].Ime) > 0)
                     {
-                        Radnik pom = magacin.ListaRadnika[i];
-                        magacin.ListaRadnika[i] = magacin.ListaRadnika[j];
-                        magacin.ListaRadnika[j] = pom;
+                        Radnik pom = br.magacin.ListaRadnika[i];
+                        br.magacin.ListaRadnika[i] = br.magacin.ListaRadnika[j];
+                        br.magacin.ListaRadnika[j] = pom;
                     }
-                    else if (nacinSortiranja == 1 && magacin.ListaRadnika[i].Ime.CompareTo(magacin.ListaRadnika[j].Ime) < 0)
+                    else if (nacinSortiranja == 1 && br.magacin.ListaRadnika[i].Ime.CompareTo(br.magacin.ListaRadnika[j].Ime) < 0)
                     {
-                        Radnik pom = magacin.ListaRadnika[i];
-                        pom = magacin.ListaRadnika[i];
-                        magacin.ListaRadnika[i] = magacin.ListaRadnika[j];
-                        magacin.ListaRadnika[j] = pom;
+                        Radnik pom = br.magacin.ListaRadnika[i];
+                        pom = br.magacin.ListaRadnika[i];
+                        br.magacin.ListaRadnika[i] = br.magacin.ListaRadnika[j];
+                        br.magacin.ListaRadnika[j] = pom;
                     }
-                    if (nacinSortiranja == 2 && magacin.ListaRadnika[i].Prezime.CompareTo(magacin.ListaRadnika[j].Prezime) > 0)
+                    if (nacinSortiranja == 2 && br.magacin.ListaRadnika[i].Prezime.CompareTo(br.magacin.ListaRadnika[j].Prezime) > 0)
                     {
-                        Radnik pom = magacin.ListaRadnika[i];
-                        magacin.ListaRadnika[i] = magacin.ListaRadnika[j];
-                        magacin.ListaRadnika[j] = pom;
+                        Radnik pom = br.magacin.ListaRadnika[i];
+                        br.magacin.ListaRadnika[i] = br.magacin.ListaRadnika[j];
+                        br.magacin.ListaRadnika[j] = pom;
                     }
-                    else if (nacinSortiranja == 3 && magacin.ListaRadnika[i].Prezime.CompareTo(magacin.ListaRadnika[j].Prezime) < 0)
+                    else if (nacinSortiranja == 3 && br.magacin.ListaRadnika[i].Prezime.CompareTo(br.magacin.ListaRadnika[j].Prezime) < 0)
                     {
-                        Radnik pom = magacin.ListaRadnika[i];
-                        pom = magacin.ListaRadnika[i];
-                        magacin.ListaRadnika[i] = magacin.ListaRadnika[j];
-                        magacin.ListaRadnika[j] = pom;
+                        Radnik pom = br.magacin.ListaRadnika[i];
+                        pom = br.magacin.ListaRadnika[i];
+                        br.magacin.ListaRadnika[i] = br.magacin.ListaRadnika[j];
+                        br.magacin.ListaRadnika[j] = pom;
                     }
-                    else if (nacinSortiranja == 4 && magacin.ListaRadnika[i].ID_Radnika < magacin.ListaRadnika[j].ID_Radnika)
+                    else if (nacinSortiranja == 4 && br.magacin.ListaRadnika[i].ID_Radnika < br.magacin.ListaRadnika[j].ID_Radnika)
                     {
-                        Radnik pom = magacin.ListaRadnika[i];
-                        magacin.ListaRadnika[i] = magacin.ListaRadnika[j];
-                        magacin.ListaRadnika[j] = pom;
+                        Radnik pom = br.magacin.ListaRadnika[i];
+                        br.magacin.ListaRadnika[i] = br.magacin.ListaRadnika[j];
+                        br.magacin.ListaRadnika[j] = pom;
                     }
-                    else if (nacinSortiranja == 5 && magacin.ListaRadnika[i].ID_Radnika > magacin.ListaRadnika[j].ID_Radnika)
+                    else if (nacinSortiranja == 5 && br.magacin.ListaRadnika[i].ID_Radnika > br.magacin.ListaRadnika[j].ID_Radnika)
                     {
-                        Radnik pom = magacin.ListaRadnika[i];
-                        magacin.ListaRadnika[i] = magacin.ListaRadnika[j];
-                        magacin.ListaRadnika[j] = pom;
+                        Radnik pom = br.magacin.ListaRadnika[i];
+                        br.magacin.ListaRadnika[i] = br.magacin.ListaRadnika[j];
+                        br.magacin.ListaRadnika[j] = pom;
                     }
 
                 }
@@ -111,28 +110,28 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if (magacin.ListaRadnika.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaRadnika.Count - 1);
+            if (br.magacin.ListaRadnika.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaRadnika.Count - 1);
             listaSelektovanihRukovodilacID.Clear();
             FKRukovodilac.Items.Clear();
             listaRukovodilaca.Clear(); 
-            foreach (Radnik rukovodilac in magacin.ListaRadnika)
+            foreach (Radnik rukovodilac in br.magacin.ListaRadnika)
             {
                 FKRukovodilac.Items.Add(rukovodilac.Ime);
                 listaRukovodilaca.Add(rukovodilac);
             }
-            for (int i = 0; i < magacin.ListaRadnika.Count; i++)
+            for (int i = 0; i < br.magacin.ListaRadnika.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaRadnika[i].ID_Radnika;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaRadnika[i].Ime;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaRadnika[i].Prezime;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaRadnika[i].Telefon;
-                dataGridView1.Rows[i].Cells[4].Value = magacin.ListaRadnika[i].JMBG;
-                dataGridView1.Rows[i].Cells[5].Value = magacin.ListaRadnika[i].Email;
-                dataGridView1.Rows[i].Cells[6].Value = magacin.ListaRadnika[i].FK_Rukovodilac.Ime;
-                dataGridView1.Rows[i].Cells[7].Value = magacin.ListaRadnika[i].Username;
-                dataGridView1.Rows[i].Cells[8].Value = magacin.ListaRadnika[i].Password;
-                listaSelektovanihRukovodilacID.Add(magacin.ListaRadnika[i].FK_Rukovodilac.ID_Radnika);
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaRadnika[i].ID_Radnika;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaRadnika[i].Ime;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaRadnika[i].Prezime;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaRadnika[i].Telefon;
+                dataGridView1.Rows[i].Cells[4].Value = br.magacin.ListaRadnika[i].JMBG;
+                dataGridView1.Rows[i].Cells[5].Value = br.magacin.ListaRadnika[i].Email;
+                dataGridView1.Rows[i].Cells[6].Value = br.magacin.ListaRadnika[i].FK_Rukovodilac.Ime;
+                dataGridView1.Rows[i].Cells[7].Value = br.magacin.ListaRadnika[i].Username;
+                dataGridView1.Rows[i].Cells[8].Value = br.magacin.ListaRadnika[i].Password;
+                listaSelektovanihRukovodilacID.Add(br.magacin.ListaRadnika[i].FK_Rukovodilac.ID_Radnika);
             }
         }
 
@@ -170,7 +169,7 @@ namespace SI2021_CoffeeMachineApp
                         username.Text = "";
                         password.Text = "";
                         FKRukovodilac.SelectedIndex = -1;
-                        magacin = br.getData();
+                        br.magacin = br.getData();
                         Prikazi();
                     }
                     else
@@ -186,7 +185,7 @@ namespace SI2021_CoffeeMachineApp
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (magacin.ListaRadnika.Count <= 0)
+            if (br.magacin.ListaRadnika.Count <= 0)
                 return;
             ime.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             prezime.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
@@ -227,7 +226,7 @@ namespace SI2021_CoffeeMachineApp
                                 username.Text = "";
                                 password.Text = "";
                                 FKRukovodilac.SelectedIndex = -1;
-                                magacin = br.getData();
+                                br.magacin = br.getData();
                                 Prikazi();
                             }
                             else

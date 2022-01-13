@@ -17,15 +17,14 @@ namespace SI2021_CoffeeMachineApp
 {
     public partial class UpisProizvoda : Form
     {
-        public Magacin magacin { get; set; }
         private int nacinSortiranja { get; set; }
         private string putanjaDoSlike { get; set; } 
         private List<Proizvodjac> listaProizvodjaca = new List<Proizvodjac>();
         private List<int> listaSelektovanihProizvodjacID = new List<int>();
-        private readonly BusinessRepository br = new BusinessRepository();
-        public UpisProizvoda(Magacin magacin)
+        private readonly BusinessRepository br;
+        public UpisProizvoda(BusinessRepository br)
         {
-            this.magacin = magacin; 
+            this.br = br; 
             InitializeComponent();
         }
 
@@ -51,7 +50,7 @@ namespace SI2021_CoffeeMachineApp
         private void UpisProizvoda_Load(object sender, EventArgs e)
         {
             cbNacinSortiranja.SelectedIndex = 0;
-            foreach (Proizvodjac proizvodjac in magacin.ListaProizvodjaca)
+            foreach (Proizvodjac proizvodjac in br.magacin.ListaProizvodjaca)
             {
                 FKProizvodjac.Items.Add(proizvodjac.Naziv);
                 listaProizvodjaca.Add(proizvodjac);
@@ -67,97 +66,97 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("Cena", "Cena proizvoda");
             dataGridView1.Columns.Add("Opis", "Opis proizvoda");
             dataGridView1.Columns.Add("FK_ID_Proizvodjaca", "Proizvođač");
-            if (magacin.ListaProizvoda.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaProizvoda.Count - 1);
-            for (int i = 0; i < magacin.ListaProizvoda.Count; i++)
+            if (br.magacin.ListaProizvoda.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaProizvoda.Count - 1);
+            for (int i = 0; i < br.magacin.ListaProizvoda.Count; i++)
             {
                 dataGridView1.Rows[i].Height = 50;
-                Bitmap pb = new Bitmap(magacin.ListaProizvoda[i].Slika_Proizvoda);
+                Bitmap pb = new Bitmap(br.magacin.ListaProizvoda[i].Slika_Proizvoda);
                 Image slika = Image.FromHbitmap(pb.GetHbitmap());
                 ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = slika;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaProizvoda[i].ID_Proizvoda;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaProizvoda[i].Naziv;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaProizvoda[i].Cena;
-                dataGridView1.Rows[i].Cells[4].Value = magacin.ListaProizvoda[i].Opis;
-                dataGridView1.Rows[i].Cells[5].Value = magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv;
-                listaSelektovanihProizvodjacID.Add(magacin.ListaProizvoda[i].FK_Proizvodjac.ID_Proizvodjaca);
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaProizvoda[i].ID_Proizvoda;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaProizvoda[i].Naziv;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaProizvoda[i].Cena;
+                dataGridView1.Rows[i].Cells[4].Value = br.magacin.ListaProizvoda[i].Opis;
+                dataGridView1.Rows[i].Cells[5].Value = br.magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv;
+                listaSelektovanihProizvodjacID.Add(br.magacin.ListaProizvoda[i].FK_Proizvodjac.ID_Proizvodjaca);
                 pb.Dispose();
             }
         }
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if (magacin.ListaProizvoda.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaProizvoda.Count - 1);
+            if (br.magacin.ListaProizvoda.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaProizvoda.Count - 1);
             listaSelektovanihProizvodjacID.Clear();
-            for (int i = 0; i < magacin.ListaProizvoda.Count; i++)
+            for (int i = 0; i < br.magacin.ListaProizvoda.Count; i++)
             {
                 dataGridView1.Rows[i].Height = 50;
-                Bitmap pb = new Bitmap(magacin.ListaProizvoda[i].Slika_Proizvoda);
+                Bitmap pb = new Bitmap(br.magacin.ListaProizvoda[i].Slika_Proizvoda);
                 Image slika = Image.FromHbitmap(pb.GetHbitmap());
                 ((DataGridViewImageCell)dataGridView1.Rows[i].Cells[0]).Value = slika;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaProizvoda[i].ID_Proizvoda;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaProizvoda[i].Naziv;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaProizvoda[i].Cena;
-                dataGridView1.Rows[i].Cells[4].Value = magacin.ListaProizvoda[i].Opis;
-                dataGridView1.Rows[i].Cells[5].Value = magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv;
-                listaSelektovanihProizvodjacID.Add(magacin.ListaProizvoda[i].FK_Proizvodjac.ID_Proizvodjaca);
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaProizvoda[i].ID_Proizvoda;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaProizvoda[i].Naziv;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaProizvoda[i].Cena;
+                dataGridView1.Rows[i].Cells[4].Value = br.magacin.ListaProizvoda[i].Opis;
+                dataGridView1.Rows[i].Cells[5].Value = br.magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv;
+                listaSelektovanihProizvodjacID.Add(br.magacin.ListaProizvoda[i].FK_Proizvodjac.ID_Proizvodjaca);
                 pb.Dispose();
             }
         }
         private void Sort()
         {
-            for (int i = 0; i < magacin.ListaProizvoda.Count - 1; i++)
+            for (int i = 0; i < br.magacin.ListaProizvoda.Count - 1; i++)
             {
-                for (int j = i; j < magacin.ListaProizvoda.Count; j++)
+                for (int j = i; j < br.magacin.ListaProizvoda.Count; j++)
                 {
-                    if (nacinSortiranja == 0 && magacin.ListaProizvoda[i].Naziv.CompareTo(magacin.ListaProizvoda[j].Naziv) > 0)
+                    if (nacinSortiranja == 0 && br.magacin.ListaProizvoda[i].Naziv.CompareTo(br.magacin.ListaProizvoda[j].Naziv) > 0)
                     {
-                        Proizvod pom = magacin.ListaProizvoda[i];
-                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
-                        magacin.ListaProizvoda[j] = pom;
+                        Proizvod pom = br.magacin.ListaProizvoda[i];
+                        br.magacin.ListaProizvoda[i] = br.magacin.ListaProizvoda[j];
+                        br.magacin.ListaProizvoda[j] = pom;
                     }
-                    else if (nacinSortiranja == 1 && magacin.ListaProizvoda[i].Naziv.CompareTo(magacin.ListaProizvoda[j].Naziv) < 0)
+                    else if (nacinSortiranja == 1 && br.magacin.ListaProizvoda[i].Naziv.CompareTo(br.magacin.ListaProizvoda[j].Naziv) < 0)
                     {
-                        Proizvod pom = magacin.ListaProizvoda[i];
-                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
-                        magacin.ListaProizvoda[j] = pom;
+                        Proizvod pom = br.magacin.ListaProizvoda[i];
+                        br.magacin.ListaProizvoda[i] = br.magacin.ListaProizvoda[j];
+                        br.magacin.ListaProizvoda[j] = pom;
                     }
-                    else if (nacinSortiranja == 2 && magacin.ListaProizvoda[i].Cena > magacin.ListaProizvoda[j].Cena)
+                    else if (nacinSortiranja == 2 && br.magacin.ListaProizvoda[i].Cena > br.magacin.ListaProizvoda[j].Cena)
                     {
-                        Proizvod pom = magacin.ListaProizvoda[i];
-                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
-                        magacin.ListaProizvoda[j] = pom;
+                        Proizvod pom = br.magacin.ListaProizvoda[i];
+                        br.magacin.ListaProizvoda[i] = br.magacin.ListaProizvoda[j];
+                        br.magacin.ListaProizvoda[j] = pom;
                     }
-                    else if (nacinSortiranja == 3 && magacin.ListaProizvoda[i].Cena < magacin.ListaProizvoda[j].Cena)
+                    else if (nacinSortiranja == 3 && br.magacin.ListaProizvoda[i].Cena < br.magacin.ListaProizvoda[j].Cena)
                     {
-                        Proizvod pom = magacin.ListaProizvoda[i];
-                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
-                        magacin.ListaProizvoda[j] = pom;
+                        Proizvod pom = br.magacin.ListaProizvoda[i];
+                        br.magacin.ListaProizvoda[i] = br.magacin.ListaProizvoda[j];
+                        br.magacin.ListaProizvoda[j] = pom;
                     }
-                    else if (nacinSortiranja == 4 && magacin.ListaProizvoda[i].ID_Proizvoda < magacin.ListaProizvoda[j].ID_Proizvoda)
+                    else if (nacinSortiranja == 4 && br.magacin.ListaProizvoda[i].ID_Proizvoda < br.magacin.ListaProizvoda[j].ID_Proizvoda)
                     {
-                        Proizvod pom = magacin.ListaProizvoda[i];
-                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
-                        magacin.ListaProizvoda[j] = pom;
+                        Proizvod pom = br.magacin.ListaProizvoda[i];
+                        br.magacin.ListaProizvoda[i] = br.magacin.ListaProizvoda[j];
+                        br.magacin.ListaProizvoda[j] = pom;
                     }
-                    else if (nacinSortiranja == 5 && magacin.ListaProizvoda[i].ID_Proizvoda > magacin.ListaProizvoda[j].ID_Proizvoda)
+                    else if (nacinSortiranja == 5 && br.magacin.ListaProizvoda[i].ID_Proizvoda > br.magacin.ListaProizvoda[j].ID_Proizvoda)
                     {
-                        Proizvod pom = magacin.ListaProizvoda[i];
-                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
-                        magacin.ListaProizvoda[j] = pom;
+                        Proizvod pom = br.magacin.ListaProizvoda[i];
+                        br.magacin.ListaProizvoda[i] = br.magacin.ListaProizvoda[j];
+                        br.magacin.ListaProizvoda[j] = pom;
                     }
-                    else if (nacinSortiranja == 6 && magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv.CompareTo(magacin.ListaProizvoda[j].FK_Proizvodjac.Naziv) < 0)
+                    else if (nacinSortiranja == 6 && br.magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv.CompareTo(br.magacin.ListaProizvoda[j].FK_Proizvodjac.Naziv) < 0)
                     {
-                        Proizvod pom = magacin.ListaProizvoda[i];
-                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
-                        magacin.ListaProizvoda[j] = pom;
+                        Proizvod pom = br.magacin.ListaProizvoda[i];
+                        br.magacin.ListaProizvoda[i] = br.magacin.ListaProizvoda[j];
+                        br.magacin.ListaProizvoda[j] = pom;
                     }
-                    else if (nacinSortiranja == 7 && magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv.CompareTo(magacin.ListaProizvoda[j].FK_Proizvodjac.Naziv) < 0)
+                    else if (nacinSortiranja == 7 && br.magacin.ListaProizvoda[i].FK_Proizvodjac.Naziv.CompareTo(br.magacin.ListaProizvoda[j].FK_Proizvodjac.Naziv) < 0)
                     {
-                        Proizvod pom = magacin.ListaProizvoda[i];
-                        magacin.ListaProizvoda[i] = magacin.ListaProizvoda[j];
-                        magacin.ListaProizvoda[j] = pom;
+                        Proizvod pom = br.magacin.ListaProizvoda[i];
+                        br.magacin.ListaProizvoda[i] = br.magacin.ListaProizvoda[j];
+                        br.magacin.ListaProizvoda[j] = pom;
                     }
 
                 }
@@ -224,7 +223,7 @@ namespace SI2021_CoffeeMachineApp
                         FKProizvodjac.SelectedIndex = -1;
                         putanjaDoSlike = "";
                         pictureBox1.Image = null;
-                        magacin = br.getData();
+                        br.magacin = br.getData();
                         Prikazi();
                     }
                     else
@@ -305,7 +304,7 @@ namespace SI2021_CoffeeMachineApp
                                 FKProizvodjac.SelectedIndex = -1;
                                 putanjaDoSlike = "";
                                 pictureBox1.Image = null;
-                                magacin = br.getData();
+                                br.magacin = br.getData();
                                 Prikazi();
                             }
                             else
@@ -333,14 +332,14 @@ namespace SI2021_CoffeeMachineApp
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (magacin.ListaProizvoda.Count <= 0)
+            if (br.magacin.ListaProizvoda.Count <= 0)
                 return;
             naziv.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
             opis.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
             cena.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
             FKProizvodjac.SelectedIndex = listaProizvodjaca.FindIndex(p => p.ID_Proizvodjaca == listaSelektovanihProizvodjacID[e.RowIndex]);
-            putanjaDoSlike = magacin.ListaProizvoda[e.RowIndex].Slika_Proizvoda;
-            Bitmap pb = new Bitmap(magacin.ListaProizvoda[e.RowIndex].Slika_Proizvoda);
+            putanjaDoSlike = br.magacin.ListaProizvoda[e.RowIndex].Slika_Proizvoda;
+            Bitmap pb = new Bitmap(br.magacin.ListaProizvoda[e.RowIndex].Slika_Proizvoda);
             Image slika = Image.FromHbitmap(pb.GetHbitmap());
             pictureBox1.Image = slika;
             pb.Dispose();

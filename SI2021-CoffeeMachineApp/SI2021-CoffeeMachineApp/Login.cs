@@ -15,9 +15,11 @@ namespace SI2021_CoffeeMachineApp
 {
     public partial class Login : Form
     {
+        private readonly BusinessRepository br;
         public Korisnik korisnik { get; set; }
-        public Login()
+        public Login(BusinessRepository br)
         {
+            this.br = br;
             InitializeComponent();
         }
         
@@ -26,10 +28,8 @@ namespace SI2021_CoffeeMachineApp
         {
             if (tbUsername.Text != "" && tbPassword.Text != "")
             {
-                BusinessRepository b = new BusinessRepository();
-                Magacin m = new Magacin();
-                m = b.getData();
-                foreach(Korisnik Kor in m.ListaKorisnika)
+                br.getData();
+                foreach(Korisnik Kor in br.magacin.ListaKorisnika)
                 {
                     if (Kor.Username.Equals(tbUsername.Text) && Kor.Password.Equals(tbPassword.Text))
                     {

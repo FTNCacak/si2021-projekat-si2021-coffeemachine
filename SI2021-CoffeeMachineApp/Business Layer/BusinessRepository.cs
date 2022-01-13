@@ -5,18 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using Data_Layer;
 using Data_Layer.Models;
+using Data_Layer.Interfaces;
+using Business_Layer.Interfaces;
 
 namespace Business_Layer
 {
-    public class BusinessRepository
+    public class BusinessRepository: IBusinessRepository
     {
-        private readonly MagacinRepository dataRepository = new MagacinRepository();
-
+        private readonly IMagacinRepository dataRepository;
+        public Magacin magacin { get; set; }
+        public BusinessRepository(IMagacinRepository magacinRepository)
+        {
+            dataRepository = magacinRepository;
+        }
         public Magacin getData()
         {
-            return dataRepository.GetAllData();
+            magacin = dataRepository.GetAllData();
+            return magacin;
         }
-
+        public void ClearMagacin()
+        {
+            this.magacin = new Magacin();
+        }
         public bool InsertProizvod(Proizvod p)
         {
             return dataRepository.InsertProizvod(p) != 0;

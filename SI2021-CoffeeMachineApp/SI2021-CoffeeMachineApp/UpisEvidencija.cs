@@ -16,28 +16,27 @@ namespace SI2021_CoffeeMachineApp
 {
     public partial class UpisEvidencija : Form
     {
-        public Magacin magacin { get; set; }
-        private readonly BusinessRepository br = new BusinessRepository();
+        private readonly BusinessRepository br;
         private int nacinSortiranja { get; set; }
         private List<Narudzbina> listaNarudzbina = new List<Narudzbina>();
         private List<Proizvod> listaProizvoda = new List<Proizvod>();
 
         private List<int> listaSelektovanihNarudzbinaID = new List<int>();
         private List<int> listaSelektovanihProizvodID = new List<int>();
-        public UpisEvidencija(Magacin magacin)
+        public UpisEvidencija(BusinessRepository br)
         {
-            this.magacin = magacin;
+            this.br = br;
             InitializeComponent();
         }
 
         private void UpisEvidencija_Load(object sender, EventArgs e)
         {
-            foreach (Narudzbina narudzbina in magacin.ListaNarudzbina)
+            foreach (Narudzbina narudzbina in br.magacin.ListaNarudzbina)
             {
                 FKNarudzbina.Items.Add(narudzbina.Opis);
                 listaNarudzbina.Add(narudzbina);
             }
-            foreach (Proizvod proizvod in magacin.ListaProizvoda)
+            foreach (Proizvod proizvod in br.magacin.ListaProizvoda)
             {
                 FKProizvod.Items.Add(proizvod.Naziv);
                 listaProizvoda.Add(proizvod);
@@ -49,47 +48,47 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("Napomena", "Napomena");
             dataGridView1.Columns.Add("FK_ID_Narudzbine", "ID narudžbine");
             dataGridView1.Columns.Add("FK_ID_Proizvoda", "Naziv proizvoda");
-            if (magacin.ListaEvidencija.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaEvidencija.Count - 1);
-            for (int i = 0; i < magacin.ListaEvidencija.Count; i++)
+            if (br.magacin.ListaEvidencija.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaEvidencija.Count - 1);
+            for (int i = 0; i < br.magacin.ListaEvidencija.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaEvidencija[i].Opis;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaEvidencija[i].Napomena;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaEvidencija[i].FK_Proizvod.Naziv;
-                listaSelektovanihNarudzbinaID.Add(magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine);
-                listaSelektovanihProizvodID.Add(magacin.ListaEvidencija[i].FK_Proizvod.ID_Proizvoda);
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaEvidencija[i].Opis;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaEvidencija[i].Napomena;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaEvidencija[i].FK_Proizvod.Naziv;
+                listaSelektovanihNarudzbinaID.Add(br.magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine);
+                listaSelektovanihProizvodID.Add(br.magacin.ListaEvidencija[i].FK_Proizvod.ID_Proizvoda);
             }
         }
         private void Sort()
         {
-            for (int i = 0; i < magacin.ListaEvidencija.Count - 1; i++)
+            for (int i = 0; i < br.magacin.ListaEvidencija.Count - 1; i++)
             {
-                for (int j = i; j < magacin.ListaEvidencija.Count; j++)
+                for (int j = i; j < br.magacin.ListaEvidencija.Count; j++)
                 {
-                    if (nacinSortiranja == 0 && magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine.CompareTo(magacin.ListaEvidencija[j].FK_Narudzbina.ID_Narudzbine) > 0)
+                    if (nacinSortiranja == 0 && br.magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine.CompareTo(br.magacin.ListaEvidencija[j].FK_Narudzbina.ID_Narudzbine) > 0)
                     {
-                        Evidencija pom = magacin.ListaEvidencija[i];
-                        magacin.ListaEvidencija[i] = magacin.ListaEvidencija[j];
-                        magacin.ListaEvidencija[j] = pom;
+                        Evidencija pom = br.magacin.ListaEvidencija[i];
+                        br.magacin.ListaEvidencija[i] = br.magacin.ListaEvidencija[j];
+                        br.magacin.ListaEvidencija[j] = pom;
                     }
-                    else if (nacinSortiranja == 0 && magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine.CompareTo(magacin.ListaEvidencija[j].FK_Narudzbina.ID_Narudzbine) < 0)
+                    else if (nacinSortiranja == 0 && br.magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine.CompareTo(br.magacin.ListaEvidencija[j].FK_Narudzbina.ID_Narudzbine) < 0)
                     {
-                        Evidencija pom = magacin.ListaEvidencija[i];
-                        magacin.ListaEvidencija[i] = magacin.ListaEvidencija[j];
-                        magacin.ListaEvidencija[j] = pom;
+                        Evidencija pom = br.magacin.ListaEvidencija[i];
+                        br.magacin.ListaEvidencija[i] = br.magacin.ListaEvidencija[j];
+                        br.magacin.ListaEvidencija[j] = pom;
                     }
-                    else if (nacinSortiranja == 2 && magacin.ListaEvidencija[i].FK_Proizvod.Naziv.CompareTo(magacin.ListaEvidencija[j].FK_Proizvod.Naziv) < 0)
+                    else if (nacinSortiranja == 2 && br.magacin.ListaEvidencija[i].FK_Proizvod.Naziv.CompareTo(br.magacin.ListaEvidencija[j].FK_Proizvod.Naziv) < 0)
                     {
-                        Evidencija pom = magacin.ListaEvidencija[i];
-                        magacin.ListaEvidencija[i] = magacin.ListaEvidencija[j];
-                        magacin.ListaEvidencija[j] = pom;
+                        Evidencija pom = br.magacin.ListaEvidencija[i];
+                        br.magacin.ListaEvidencija[i] = br.magacin.ListaEvidencija[j];
+                        br.magacin.ListaEvidencija[j] = pom;
                     }
-                    else if (nacinSortiranja == 3 && magacin.ListaEvidencija[i].FK_Proizvod.Naziv.CompareTo(magacin.ListaEvidencija[j].FK_Proizvod.Naziv) < 0)
+                    else if (nacinSortiranja == 3 && br.magacin.ListaEvidencija[i].FK_Proizvod.Naziv.CompareTo(br.magacin.ListaEvidencija[j].FK_Proizvod.Naziv) < 0)
                     {
-                        Evidencija pom = magacin.ListaEvidencija[i];
-                        magacin.ListaEvidencija[i] = magacin.ListaEvidencija[j];
-                        magacin.ListaEvidencija[j] = pom;
+                        Evidencija pom = br.magacin.ListaEvidencija[i];
+                        br.magacin.ListaEvidencija[i] = br.magacin.ListaEvidencija[j];
+                        br.magacin.ListaEvidencija[j] = pom;
                     }
                 }
             }
@@ -97,18 +96,18 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if (magacin.ListaEvidencija.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaEvidencija.Count - 1);
+            if (br.magacin.ListaEvidencija.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaEvidencija.Count - 1);
             listaSelektovanihNarudzbinaID.Clear();
             listaSelektovanihProizvodID.Clear();
-            for (int i = 0; i < magacin.ListaEvidencija.Count; i++)
+            for (int i = 0; i < br.magacin.ListaEvidencija.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaEvidencija[i].Opis;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaEvidencija[i].Napomena;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaEvidencija[i].FK_Proizvod.Naziv;
-                listaSelektovanihNarudzbinaID.Add(magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine);
-                listaSelektovanihProizvodID.Add(magacin.ListaEvidencija[i].FK_Proizvod.ID_Proizvoda);
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaEvidencija[i].Opis;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaEvidencija[i].Napomena;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaEvidencija[i].FK_Proizvod.Naziv;
+                listaSelektovanihNarudzbinaID.Add(br.magacin.ListaEvidencija[i].FK_Narudzbina.ID_Narudzbine);
+                listaSelektovanihProizvodID.Add(br.magacin.ListaEvidencija[i].FK_Proizvod.ID_Proizvoda);
             }
         }
 
@@ -137,7 +136,7 @@ namespace SI2021_CoffeeMachineApp
                         FKProizvod.SelectedIndex = -1;
                         opis.Text = "";
                         napomena.Text = "";
-                        magacin = br.getData();
+                        br.magacin = br.getData();
                         Prikazi();
                     }
                     else
@@ -173,7 +172,7 @@ namespace SI2021_CoffeeMachineApp
                                 FKProizvod.SelectedIndex = -1;
                                 opis.Text = "";
                                 napomena.Text = "";
-                                magacin = br.getData();
+                                br.magacin = br.getData();
                                 Prikazi();
                             }
                             else
@@ -201,7 +200,7 @@ namespace SI2021_CoffeeMachineApp
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (magacin.ListaEvidencija.Count <= 0)
+            if (br.magacin.ListaEvidencija.Count <= 0)
                 return;
             FKNarudzbina.SelectedIndex = listaNarudzbina.FindIndex(n => n.ID_Narudzbine == listaSelektovanihNarudzbinaID[e.RowIndex]);
             FKProizvod.SelectedIndex = listaProizvoda.FindIndex(p => p.ID_Proizvoda == listaSelektovanihProizvodID[e.RowIndex]);

@@ -11,21 +11,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Business_Layer.Interfaces;
 
 namespace SI2021_CoffeeMachineApp
 {
     public partial class Pocetna : Form
     {
         private Korisnik korisnik = new Korisnik();
-        public Magacin magacin { get; set; }
-        public Pocetna()
+        private readonly BusinessRepository br;
+        public Pocetna(IBusinessRepository br) 
         {
+            this.br = (BusinessRepository)br;
+            br.getData();
             InitializeComponent();
         }
 
         private void prijaviSeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (Login f = new Login())
+            using (Login f = new Login(br))
             {
                 var rezultat = f.ShowDialog();
                 if (rezultat == DialogResult.OK)
@@ -50,8 +53,7 @@ namespace SI2021_CoffeeMachineApp
                     odjaviSeToolStripMenuItem.Visible = true;
                     prijaviSeToolStripMenuItem.Visible = false;
                     lblWelcome.Text = "Dobrodošli, korisnik "+korisnik.Ime+" "+korisnik.Prezime;
-                    BusinessRepository br = new BusinessRepository();
-                    magacin = br.getData();
+                    br.magacin = br.getData();
                 }
             }
             
@@ -59,9 +61,14 @@ namespace SI2021_CoffeeMachineApp
 
         private void prikazProizvodaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            PrikazProizvoda pp = new PrikazProizvoda(magacin);
-            pp.ShowDialog();
+            using (PrikazProizvoda pp = new PrikazProizvoda(br))
+            {
+                pp.ShowDialog();
+                if (pp.DialogResult == DialogResult.Cancel)
+                {
+                    this.br.getData();
+                }
+            }
         }
 
         private void Pocetna_Load(object sender, EventArgs e)
@@ -72,95 +79,95 @@ namespace SI2021_CoffeeMachineApp
 
         private void prikazProizvođačaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PrikazProizvodjaca pp = new PrikazProizvodjaca(magacin))
+            using (PrikazProizvodjaca pp = new PrikazProizvodjaca(br))
             {
                 pp.ShowDialog();
                 if (pp.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = pp.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void prikazKorisnikaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PrikazKorisnika pk = new PrikazKorisnika(magacin))
+            using (PrikazKorisnika pk = new PrikazKorisnika(br))
             {
                 pk.ShowDialog();
                 if (pk.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = pk.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void prikazDobavljačaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PrikazDobavljaca pd = new PrikazDobavljaca(magacin))
+            using (PrikazDobavljaca pd = new PrikazDobavljaca(br))
             {
                 pd.ShowDialog();
                 if (pd.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = pd.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void prikazDopremnicaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PrikazDopremnice pd = new PrikazDopremnice(magacin))
+            using (PrikazDopremnice pd = new PrikazDopremnice(br))
             {
                 pd.ShowDialog();
                 if (pd.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = pd.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void prikazNarudžbinaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PrikazNarudzbine pn = new PrikazNarudzbine(magacin))
+            using (PrikazNarudzbine pn = new PrikazNarudzbine(br))
             {
                 pn.ShowDialog();
                 if (pn.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = pn.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void prikazRadnikaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PrikazRadnika pr = new PrikazRadnika(magacin))
+            using (PrikazRadnika pr = new PrikazRadnika(br))
             {
                 pr.ShowDialog();
                 if (pr.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = pr.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void prikazEvidencijeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PrikazEvidencije pe = new PrikazEvidencije(magacin))
+            using (PrikazEvidencije pe = new PrikazEvidencije(br))
             {
                 pe.ShowDialog();
                 if (pe.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = pe.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void upisProizvodaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (UpisProizvoda up = new UpisProizvoda(magacin)) {
+            using (UpisProizvoda up = new UpisProizvoda(br)) {
                 up.ShowDialog();
                 if(up.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = up.magacin;
+                    this.br.getData();
                 }
             }
         }
@@ -168,7 +175,7 @@ namespace SI2021_CoffeeMachineApp
         private void odjaviSeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             korisnik = new Korisnik();
-            magacin = new Magacin();
+            br.ClearMagacin();
             menuStrip1.Items[0].Enabled = false;
             menuStrip1.Items[1].Enabled = false;
             prikazRadnikaToolStripMenuItem.Visible = false;
@@ -183,84 +190,84 @@ namespace SI2021_CoffeeMachineApp
 
         private void upisProizvođačaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (UpisProizvodjaca up = new UpisProizvodjaca(magacin))
+            using (UpisProizvodjaca up = new UpisProizvodjaca(br))
             {
                 up.ShowDialog();
                 if (up.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = up.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void upisToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            using (UpisDobavljaca ud = new UpisDobavljaca(magacin))
+            using (UpisDobavljaca ud = new UpisDobavljaca(br))
             {
                 ud.ShowDialog();
                 if (ud.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = ud.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void upisToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            using (UpisDopremnica ud = new UpisDopremnica(magacin))
+            using (UpisDopremnica ud = new UpisDopremnica(br))
             {
                 ud.ShowDialog();
                 if (ud.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = ud.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void upisNarudžbinaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (UpisNarudzbina un = new UpisNarudzbina(magacin))
+            using (UpisNarudzbina un = new UpisNarudzbina(br))
             {
                 un.ShowDialog();
                 if (un.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = un.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void upisEvidencijaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (UpisEvidencija ue = new UpisEvidencija(magacin))
+            using (UpisEvidencija ue = new UpisEvidencija(br))
             {
                 ue.ShowDialog();
                 if (ue.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = ue.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void upisKorisnikaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (UpisKorisnika uk = new UpisKorisnika(magacin))
+            using (UpisKorisnika uk = new UpisKorisnika(br))
             {
                 uk.ShowDialog();
                 if (uk.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = uk.magacin;
+                    this.br.getData();
                 }
             }
         }
 
         private void upisRadnikaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (UpisRadnika ur = new UpisRadnika(magacin))
+            using (UpisRadnika ur = new UpisRadnika(br))
             {
                 ur.ShowDialog();
                 if (ur.DialogResult == DialogResult.Cancel)
                 {
-                    this.magacin = ur.magacin;
+                    this.br.getData();
                 }
             }
         }

@@ -15,12 +15,11 @@ namespace SI2021_CoffeeMachineApp
 {
     public partial class UpisProizvodjaca : Form
     {
-        public Magacin magacin { get; set; }
-        private readonly BusinessRepository br = new BusinessRepository();
+        private readonly BusinessRepository br;
         private int nacinSortiranja { get; set; }
-        public UpisProizvodjaca(Magacin magacin)
+        public UpisProizvodjaca(BusinessRepository br)
         {
-            this.magacin = magacin;
+            this.br = br;
             InitializeComponent();
         }
 
@@ -32,46 +31,46 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("Drzava", "Država u kojoj je proizvođač");
             dataGridView1.Columns.Add("Adresa", "Adresa proizvođača");
             dataGridView1.Columns.Add("Opis", "Opis proizvođača");
-            if (magacin.ListaProizvodjaca.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaProizvodjaca.Count - 1);
-            for (int i = 0; i < magacin.ListaProizvodjaca.Count; i++)
+            if (br.magacin.ListaProizvodjaca.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaProizvodjaca.Count - 1);
+            for (int i = 0; i < br.magacin.ListaProizvodjaca.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaProizvodjaca[i].ID_Proizvodjaca;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaProizvodjaca[i].Naziv;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaProizvodjaca[i].Drzava;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaProizvodjaca[i].Adresa;
-                dataGridView1.Rows[i].Cells[4].Value = magacin.ListaProizvodjaca[i].Opis;
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaProizvodjaca[i].ID_Proizvodjaca;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaProizvodjaca[i].Naziv;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaProizvodjaca[i].Drzava;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaProizvodjaca[i].Adresa;
+                dataGridView1.Rows[i].Cells[4].Value = br.magacin.ListaProizvodjaca[i].Opis;
             }
         }
         private void Sort()
         {
-            for (int i = 0; i < magacin.ListaProizvodjaca.Count - 1; i++)
+            for (int i = 0; i < br.magacin.ListaProizvodjaca.Count - 1; i++)
             {
-                for (int j = i; j < magacin.ListaProizvodjaca.Count; j++)
+                for (int j = i; j < br.magacin.ListaProizvodjaca.Count; j++)
                 {
-                    if (nacinSortiranja == 0 && magacin.ListaProizvodjaca[i].Naziv.CompareTo(magacin.ListaProizvodjaca[j].Naziv) > 0)
+                    if (nacinSortiranja == 0 && br.magacin.ListaProizvodjaca[i].Naziv.CompareTo(br.magacin.ListaProizvodjaca[j].Naziv) > 0)
                     {
-                        Proizvodjac pom = magacin.ListaProizvodjaca[i];
-                        magacin.ListaProizvodjaca[i] = magacin.ListaProizvodjaca[j];
-                        magacin.ListaProizvodjaca[j] = pom;
+                        Proizvodjac pom = br.magacin.ListaProizvodjaca[i];
+                        br.magacin.ListaProizvodjaca[i] = br.magacin.ListaProizvodjaca[j];
+                        br.magacin.ListaProizvodjaca[j] = pom;
                     }
-                    else if (nacinSortiranja == 1 && magacin.ListaProizvodjaca[i].Naziv.CompareTo(magacin.ListaProizvodjaca[j].Naziv) < 0)
+                    else if (nacinSortiranja == 1 && br.magacin.ListaProizvodjaca[i].Naziv.CompareTo(br.magacin.ListaProizvodjaca[j].Naziv) < 0)
                     {
-                        Proizvodjac pom = magacin.ListaProizvodjaca[i];
-                        magacin.ListaProizvodjaca[i] = magacin.ListaProizvodjaca[j];
-                        magacin.ListaProizvodjaca[j] = pom;
+                        Proizvodjac pom = br.magacin.ListaProizvodjaca[i];
+                        br.magacin.ListaProizvodjaca[i] = br.magacin.ListaProizvodjaca[j];
+                        br.magacin.ListaProizvodjaca[j] = pom;
                     }
-                    else if (nacinSortiranja == 2 && magacin.ListaProizvodjaca[i].ID_Proizvodjaca < magacin.ListaProizvodjaca[j].ID_Proizvodjaca)
+                    else if (nacinSortiranja == 2 && br.magacin.ListaProizvodjaca[i].ID_Proizvodjaca < br.magacin.ListaProizvodjaca[j].ID_Proizvodjaca)
                     {
-                        Proizvodjac pom = magacin.ListaProizvodjaca[i];
-                        magacin.ListaProizvodjaca[i] = magacin.ListaProizvodjaca[j];
-                        magacin.ListaProizvodjaca[j] = pom;
+                        Proizvodjac pom = br.magacin.ListaProizvodjaca[i];
+                        br.magacin.ListaProizvodjaca[i] = br.magacin.ListaProizvodjaca[j];
+                        br.magacin.ListaProizvodjaca[j] = pom;
                     }
-                    else if (nacinSortiranja == 3 && magacin.ListaProizvodjaca[i].ID_Proizvodjaca > magacin.ListaProizvodjaca[j].ID_Proizvodjaca)
+                    else if (nacinSortiranja == 3 && br.magacin.ListaProizvodjaca[i].ID_Proizvodjaca > br.magacin.ListaProizvodjaca[j].ID_Proizvodjaca)
                     {
-                        Proizvodjac pom = magacin.ListaProizvodjaca[i];
-                        magacin.ListaProizvodjaca[i] = magacin.ListaProizvodjaca[j];
-                        magacin.ListaProizvodjaca[j] = pom;
+                        Proizvodjac pom = br.magacin.ListaProizvodjaca[i];
+                        br.magacin.ListaProizvodjaca[i] = br.magacin.ListaProizvodjaca[j];
+                        br.magacin.ListaProizvodjaca[j] = pom;
                     }
                 }
             }
@@ -79,15 +78,15 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if (magacin.ListaProizvodjaca.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaProizvodjaca.Count - 1);
-            for (int i = 0; i < magacin.ListaProizvodjaca.Count; i++)
+            if (br.magacin.ListaProizvodjaca.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaProizvodjaca.Count - 1);
+            for (int i = 0; i < br.magacin.ListaProizvodjaca.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaProizvodjaca[i].ID_Proizvodjaca;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaProizvodjaca[i].Naziv;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaProizvodjaca[i].Drzava;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaProizvodjaca[i].Adresa;
-                dataGridView1.Rows[i].Cells[4].Value = magacin.ListaProizvodjaca[i].Opis;
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaProizvodjaca[i].ID_Proizvodjaca;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaProizvodjaca[i].Naziv;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaProizvodjaca[i].Drzava;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaProizvodjaca[i].Adresa;
+                dataGridView1.Rows[i].Cells[4].Value = br.magacin.ListaProizvodjaca[i].Opis;
             }
         }
 
@@ -115,7 +114,7 @@ namespace SI2021_CoffeeMachineApp
                     drzava.Text = "";
                     adresa.Text = "";
                     opis.Text = "";
-                    magacin = br.getData();
+                    br.magacin = br.getData();
                     Prikazi();
                 }
                 else
@@ -149,7 +148,7 @@ namespace SI2021_CoffeeMachineApp
                                 drzava.Text = "";
                                 adresa.Text = "";
                                 opis.Text = "";
-                                magacin = br.getData();
+                                br.magacin = br.getData();
                                 Prikazi();
                             }
                             else
@@ -178,7 +177,7 @@ namespace SI2021_CoffeeMachineApp
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (magacin.ListaProizvodjaca.Count <= 0)
+            if (br.magacin.ListaProizvodjaca.Count <= 0)
                 return;
             naziv.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             drzava.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();

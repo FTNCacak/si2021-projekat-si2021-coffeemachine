@@ -15,12 +15,11 @@ namespace SI2021_CoffeeMachineApp
 {
     public partial class PrikazNarudzbine : Form
     {
-        public Magacin magacin { get; set; }
         private int nacinSortiranja { get; set; }
-        private readonly BusinessRepository br = new BusinessRepository();
-        public PrikazNarudzbine(Magacin magacin)
+        private readonly BusinessRepository br;
+        public PrikazNarudzbine(BusinessRepository br)
         {
-            this.magacin = magacin;
+            this.br = br;
             InitializeComponent();
         }
         private void PrikazNarudzbine_Load(object sender, EventArgs e)
@@ -30,33 +29,33 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("Napomena", "Napomenat");
             dataGridView1.Columns.Add("Opis", "Opis");
             dataGridView1.Columns.Add("Datum", "Datum");
-            if (magacin.ListaNarudzbina.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaNarudzbina.Count - 1);
-            for (int i = 0; i < magacin.ListaNarudzbina.Count; i++)
+            if (br.magacin.ListaNarudzbina.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaNarudzbina.Count - 1);
+            for (int i = 0; i < br.magacin.ListaNarudzbina.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaNarudzbina[i].ID_Narudzbine;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaNarudzbina[i].Napomena;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaNarudzbina[i].Opis;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaNarudzbina[i].Datum;
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaNarudzbina[i].ID_Narudzbine;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaNarudzbina[i].Napomena;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaNarudzbina[i].Opis;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaNarudzbina[i].Datum;
             }
         }
         private void Sort()
         {
-            for (int i = 0; i < magacin.ListaNarudzbina.Count - 1; i++)
+            for (int i = 0; i < br.magacin.ListaNarudzbina.Count - 1; i++)
             {
-                for (int j = i; j < magacin.ListaNarudzbina.Count; j++)
+                for (int j = i; j < br.magacin.ListaNarudzbina.Count; j++)
                 { 
-                    if (nacinSortiranja == 0 && magacin.ListaNarudzbina[i].ID_Narudzbine < magacin.ListaNarudzbina[j].ID_Narudzbine)
+                    if (nacinSortiranja == 0 && br.magacin.ListaNarudzbina[i].ID_Narudzbine < br.magacin.ListaNarudzbina[j].ID_Narudzbine)
                     {
-                        Narudzbina pom = magacin.ListaNarudzbina[i];
-                        magacin.ListaNarudzbina[i] = magacin.ListaNarudzbina[j];
-                        magacin.ListaNarudzbina[j] = pom;
+                        Narudzbina pom = br.magacin.ListaNarudzbina[i];
+                        br.magacin.ListaNarudzbina[i] = br.magacin.ListaNarudzbina[j];
+                        br.magacin.ListaNarudzbina[j] = pom;
                     }
-                    else if (nacinSortiranja == 1 && magacin.ListaNarudzbina[i].ID_Narudzbine > magacin.ListaNarudzbina[j].ID_Narudzbine)
+                    else if (nacinSortiranja == 1 && br.magacin.ListaNarudzbina[i].ID_Narudzbine > br.magacin.ListaNarudzbina[j].ID_Narudzbine)
                     {
-                        Narudzbina pom = magacin.ListaNarudzbina[i];
-                        magacin.ListaNarudzbina[i] = magacin.ListaNarudzbina[j];
-                        magacin.ListaNarudzbina[j] = pom;
+                        Narudzbina pom = br.magacin.ListaNarudzbina[i];
+                        br.magacin.ListaNarudzbina[i] = br.magacin.ListaNarudzbina[j];
+                        br.magacin.ListaNarudzbina[j] = pom;
                     }
                 }
             }
@@ -64,14 +63,14 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if (magacin.ListaNarudzbina.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaNarudzbina.Count - 1);
-            for (int i = 0; i < magacin.ListaNarudzbina.Count; i++)
+            if (br.magacin.ListaNarudzbina.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaNarudzbina.Count - 1);
+            for (int i = 0; i < br.magacin.ListaNarudzbina.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaNarudzbina[i].ID_Narudzbine;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaNarudzbina[i].Napomena;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaNarudzbina[i].Opis;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaNarudzbina[i].Datum;
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaNarudzbina[i].ID_Narudzbine;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaNarudzbina[i].Napomena;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaNarudzbina[i].Opis;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaNarudzbina[i].Datum;
             }
         }
 
@@ -88,7 +87,7 @@ namespace SI2021_CoffeeMachineApp
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (magacin.ListaNarudzbina.Count <= 0)
+            if (br.magacin.ListaNarudzbina.Count <= 0)
                 return;
             bool check = false;
             foreach (DataGridViewRow Row in dataGridView1.SelectedRows)
@@ -101,7 +100,7 @@ namespace SI2021_CoffeeMachineApp
                 }
                 check = true;
             }
-            magacin = br.getData();
+            br.magacin = br.getData();
             if (check)
                 MessageBox.Show("Uspešno obrisani podaci!");
             else

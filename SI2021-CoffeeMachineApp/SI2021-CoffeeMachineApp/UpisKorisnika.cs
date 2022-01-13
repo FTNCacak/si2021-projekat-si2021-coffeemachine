@@ -15,12 +15,11 @@ namespace SI2021_CoffeeMachineApp
 {
     public partial class UpisKorisnika : Form
     {
-        public Magacin magacin { get; set; }
-        private readonly BusinessRepository br = new BusinessRepository();
+        private readonly BusinessRepository br;
         private int nacinSortiranja { get; set; }
-        public UpisKorisnika(Magacin magacin)
+        public UpisKorisnika(BusinessRepository br)
         {
-            this.magacin = magacin;
+            this.br = br;
             InitializeComponent();
         }
 
@@ -35,69 +34,69 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("Prezime", "Prezime korisnika");
             dataGridView1.Columns.Add("Telefon", "Telefon korisnika");
             dataGridView1.Columns.Add("Role", "Uloga korisnika");
-            if (magacin.ListaKorisnika.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaKorisnika.Count - 1);
-            for (int i = 0; i < magacin.ListaKorisnika.Count; i++)
+            if (br.magacin.ListaKorisnika.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaKorisnika.Count - 1);
+            for (int i = 0; i < br.magacin.ListaKorisnika.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaKorisnika[i].ID_Korisnika;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaKorisnika[i].Username;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaKorisnika[i].Password;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaKorisnika[i].Email;
-                dataGridView1.Rows[i].Cells[4].Value = magacin.ListaKorisnika[i].Ime;
-                dataGridView1.Rows[i].Cells[5].Value = magacin.ListaKorisnika[i].Prezime;
-                dataGridView1.Rows[i].Cells[6].Value = magacin.ListaKorisnika[i].Telefon;
-                dataGridView1.Rows[i].Cells[7].Value = magacin.ListaKorisnika[i].Role;
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaKorisnika[i].ID_Korisnika;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaKorisnika[i].Username;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaKorisnika[i].Password;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaKorisnika[i].Email;
+                dataGridView1.Rows[i].Cells[4].Value = br.magacin.ListaKorisnika[i].Ime;
+                dataGridView1.Rows[i].Cells[5].Value = br.magacin.ListaKorisnika[i].Prezime;
+                dataGridView1.Rows[i].Cells[6].Value = br.magacin.ListaKorisnika[i].Telefon;
+                dataGridView1.Rows[i].Cells[7].Value = br.magacin.ListaKorisnika[i].Role;
             }
         }
         private void Sort()
         {
-            for (int i = 0; i < magacin.ListaKorisnika.Count - 1; i++)
+            for (int i = 0; i < br.magacin.ListaKorisnika.Count - 1; i++)
             {
-                for (int j = i; j < magacin.ListaKorisnika.Count; j++)
+                for (int j = i; j < br.magacin.ListaKorisnika.Count; j++)
                 {
-                    if (nacinSortiranja == 0 && magacin.ListaKorisnika[i].Ime.CompareTo(magacin.ListaKorisnika[j].Ime) > 0)
+                    if (nacinSortiranja == 0 && br.magacin.ListaKorisnika[i].Ime.CompareTo(br.magacin.ListaKorisnika[j].Ime) > 0)
                     {
-                        Korisnik pom = magacin.ListaKorisnika[i];
-                        magacin.ListaKorisnika[i] = magacin.ListaKorisnika[j];
-                        magacin.ListaKorisnika[j] = pom;
+                        Korisnik pom = br.magacin.ListaKorisnika[i];
+                        br.magacin.ListaKorisnika[i] = br.magacin.ListaKorisnika[j];
+                        br.magacin.ListaKorisnika[j] = pom;
                     }
-                    else if (nacinSortiranja == 1 && magacin.ListaKorisnika[i].Ime.CompareTo(magacin.ListaKorisnika[j].Ime) < 0)
+                    else if (nacinSortiranja == 1 && br.magacin.ListaKorisnika[i].Ime.CompareTo(br.magacin.ListaKorisnika[j].Ime) < 0)
                     {
-                        Korisnik pom = magacin.ListaKorisnika[i];
-                        pom = magacin.ListaKorisnika[i];
-                        magacin.ListaKorisnika[i] = magacin.ListaKorisnika[j];
-                        magacin.ListaKorisnika[j] = pom;
+                        Korisnik pom = br.magacin.ListaKorisnika[i];
+                        pom = br.magacin.ListaKorisnika[i];
+                        br.magacin.ListaKorisnika[i] = br.magacin.ListaKorisnika[j];
+                        br.magacin.ListaKorisnika[j] = pom;
                     }
-                    if (nacinSortiranja == 2 && magacin.ListaKorisnika[i].Prezime.CompareTo(magacin.ListaKorisnika[j].Prezime) > 0)
+                    if (nacinSortiranja == 2 && br.magacin.ListaKorisnika[i].Prezime.CompareTo(br.magacin.ListaKorisnika[j].Prezime) > 0)
                     {
-                        Korisnik pom = magacin.ListaKorisnika[i];
-                        magacin.ListaKorisnika[i] = magacin.ListaKorisnika[j];
-                        magacin.ListaKorisnika[j] = pom;
+                        Korisnik pom = br.magacin.ListaKorisnika[i];
+                        br.magacin.ListaKorisnika[i] = br.magacin.ListaKorisnika[j];
+                        br.magacin.ListaKorisnika[j] = pom;
                     }
-                    else if (nacinSortiranja == 3 && magacin.ListaKorisnika[i].Prezime.CompareTo(magacin.ListaKorisnika[j].Prezime) < 0)
+                    else if (nacinSortiranja == 3 && br.magacin.ListaKorisnika[i].Prezime.CompareTo(br.magacin.ListaKorisnika[j].Prezime) < 0)
                     {
-                        Korisnik pom = magacin.ListaKorisnika[i];
-                        pom = magacin.ListaKorisnika[i];
-                        magacin.ListaKorisnika[i] = magacin.ListaKorisnika[j];
-                        magacin.ListaKorisnika[j] = pom;
+                        Korisnik pom = br.magacin.ListaKorisnika[i];
+                        pom = br.magacin.ListaKorisnika[i];
+                        br.magacin.ListaKorisnika[i] = br.magacin.ListaKorisnika[j];
+                        br.magacin.ListaKorisnika[j] = pom;
                     }
-                    else if (nacinSortiranja == 4 && magacin.ListaKorisnika[i].ID_Korisnika < magacin.ListaKorisnika[j].ID_Korisnika)
+                    else if (nacinSortiranja == 4 && br.magacin.ListaKorisnika[i].ID_Korisnika < br.magacin.ListaKorisnika[j].ID_Korisnika)
                     {
-                        Korisnik pom = magacin.ListaKorisnika[i];
-                        magacin.ListaKorisnika[i] = magacin.ListaKorisnika[j];
-                        magacin.ListaKorisnika[j] = pom;
+                        Korisnik pom = br.magacin.ListaKorisnika[i];
+                        br.magacin.ListaKorisnika[i] = br.magacin.ListaKorisnika[j];
+                        br.magacin.ListaKorisnika[j] = pom;
                     }
-                    else if (nacinSortiranja == 5 && magacin.ListaKorisnika[i].ID_Korisnika > magacin.ListaKorisnika[j].ID_Korisnika)
+                    else if (nacinSortiranja == 5 && br.magacin.ListaKorisnika[i].ID_Korisnika > br.magacin.ListaKorisnika[j].ID_Korisnika)
                     {
-                        Korisnik pom = magacin.ListaKorisnika[i];
-                        magacin.ListaKorisnika[i] = magacin.ListaKorisnika[j];
-                        magacin.ListaKorisnika[j] = pom;
+                        Korisnik pom = br.magacin.ListaKorisnika[i];
+                        br.magacin.ListaKorisnika[i] = br.magacin.ListaKorisnika[j];
+                        br.magacin.ListaKorisnika[j] = pom;
                     }
-                    else if (nacinSortiranja == 6 && magacin.ListaKorisnika[i].Role.CompareTo(magacin.ListaKorisnika[j].Role) > 0)
+                    else if (nacinSortiranja == 6 && br.magacin.ListaKorisnika[i].Role.CompareTo(br.magacin.ListaKorisnika[j].Role) > 0)
                     {
-                        Korisnik pom = magacin.ListaKorisnika[i];
-                        magacin.ListaKorisnika[i] = magacin.ListaKorisnika[j];
-                        magacin.ListaKorisnika[j] = pom;
+                        Korisnik pom = br.magacin.ListaKorisnika[i];
+                        br.magacin.ListaKorisnika[i] = br.magacin.ListaKorisnika[j];
+                        br.magacin.ListaKorisnika[j] = pom;
                     }
 
                 }
@@ -106,18 +105,18 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if (magacin.ListaKorisnika.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaKorisnika.Count - 1);
-            for (int i = 0; i < magacin.ListaKorisnika.Count; i++)
+            if (br.magacin.ListaKorisnika.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaKorisnika.Count - 1);
+            for (int i = 0; i < br.magacin.ListaKorisnika.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaKorisnika[i].ID_Korisnika;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaKorisnika[i].Username;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaKorisnika[i].Password;
-                dataGridView1.Rows[i].Cells[3].Value = magacin.ListaKorisnika[i].Email;
-                dataGridView1.Rows[i].Cells[4].Value = magacin.ListaKorisnika[i].Ime;
-                dataGridView1.Rows[i].Cells[5].Value = magacin.ListaKorisnika[i].Prezime;
-                dataGridView1.Rows[i].Cells[6].Value = magacin.ListaKorisnika[i].Telefon;
-                dataGridView1.Rows[i].Cells[7].Value = magacin.ListaKorisnika[i].Role;
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaKorisnika[i].ID_Korisnika;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaKorisnika[i].Username;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaKorisnika[i].Password;
+                dataGridView1.Rows[i].Cells[3].Value = br.magacin.ListaKorisnika[i].Email;
+                dataGridView1.Rows[i].Cells[4].Value = br.magacin.ListaKorisnika[i].Ime;
+                dataGridView1.Rows[i].Cells[5].Value = br.magacin.ListaKorisnika[i].Prezime;
+                dataGridView1.Rows[i].Cells[6].Value = br.magacin.ListaKorisnika[i].Telefon;
+                dataGridView1.Rows[i].Cells[7].Value = br.magacin.ListaKorisnika[i].Role;
             }
         }
 
@@ -149,7 +148,7 @@ namespace SI2021_CoffeeMachineApp
                         prezime.Text = "";
                         telefon.Text = "";
                         role.SelectedIndex = -1;
-                        magacin = br.getData();
+                        br.magacin = br.getData();
                         Prikazi();
                     }
                     else
@@ -186,7 +185,7 @@ namespace SI2021_CoffeeMachineApp
                                 prezime.Text = "";
                                 telefon.Text = "";
                                 role.SelectedIndex = -1;
-                                magacin = br.getData();
+                                br.magacin = br.getData();
                                 Prikazi();
                             }
                             else
@@ -214,7 +213,7 @@ namespace SI2021_CoffeeMachineApp
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (magacin.ListaKorisnika.Count <= 0)
+            if (br.magacin.ListaKorisnika.Count <= 0)
                 return;
             username.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             password.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();

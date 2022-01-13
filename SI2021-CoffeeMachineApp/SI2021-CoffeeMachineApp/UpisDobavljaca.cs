@@ -15,12 +15,11 @@ namespace SI2021_CoffeeMachineApp
 {
     public partial class UpisDobavljaca : Form
     {
-        public Magacin magacin { get; set; }
-        private readonly BusinessRepository br = new BusinessRepository();
+        private readonly BusinessRepository br;
         private int nacinSortiranja { get; set; }
-        public UpisDobavljaca(Magacin magacin)
+        public UpisDobavljaca(BusinessRepository br)
         {
-            this.magacin = magacin;
+            this.br = br;
             InitializeComponent();
         }
 
@@ -30,44 +29,44 @@ namespace SI2021_CoffeeMachineApp
             dataGridView1.Columns.Add("ID_Dobavljaca", "ID dobavljača");
             dataGridView1.Columns.Add("Naziv", "Naziv dobavljača");
             dataGridView1.Columns.Add("Adresa", "Adresa dobavljača");
-            if (magacin.ListaDobavljaca.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaDobavljaca.Count - 1);
-            for (int i = 0; i < magacin.ListaDobavljaca.Count; i++)
+            if (br.magacin.ListaDobavljaca.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaDobavljaca.Count - 1);
+            for (int i = 0; i < br.magacin.ListaDobavljaca.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaDobavljaca[i].ID_Dobavljaca;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaDobavljaca[i].Naziv;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaDobavljaca[i].Adresa;
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaDobavljaca[i].ID_Dobavljaca;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaDobavljaca[i].Naziv;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaDobavljaca[i].Adresa;
             }
         }
         private void Sort()
         {
-            for (int i = 0; i < magacin.ListaDobavljaca.Count - 1; i++)
+            for (int i = 0; i < br.magacin.ListaDobavljaca.Count - 1; i++)
             {
-                for (int j = i; j < magacin.ListaDobavljaca.Count; j++)
+                for (int j = i; j < br.magacin.ListaDobavljaca.Count; j++)
                 {
-                    if (nacinSortiranja == 0 && magacin.ListaDobavljaca[i].Naziv.CompareTo(magacin.ListaDobavljaca[j].Naziv) > 0)
+                    if (nacinSortiranja == 0 && br.magacin.ListaDobavljaca[i].Naziv.CompareTo(br.magacin.ListaDobavljaca[j].Naziv) > 0)
                     {
-                        Dobavljac pom = magacin.ListaDobavljaca[i];
-                        magacin.ListaDobavljaca[i] = magacin.ListaDobavljaca[j];
-                        magacin.ListaDobavljaca[j] = pom;
+                        Dobavljac pom = br.magacin.ListaDobavljaca[i];
+                        br.magacin.ListaDobavljaca[i] = br.magacin.ListaDobavljaca[j];
+                        br.magacin.ListaDobavljaca[j] = pom;
                     }
-                    else if (nacinSortiranja == 1 && magacin.ListaDobavljaca[i].Naziv.CompareTo(magacin.ListaDobavljaca[j].Naziv) < 0)
+                    else if (nacinSortiranja == 1 && br.magacin.ListaDobavljaca[i].Naziv.CompareTo(br.magacin.ListaDobavljaca[j].Naziv) < 0)
                     {
-                        Dobavljac pom = magacin.ListaDobavljaca[i];
-                        magacin.ListaDobavljaca[i] = magacin.ListaDobavljaca[j];
-                        magacin.ListaDobavljaca[j] = pom;
+                        Dobavljac pom = br.magacin.ListaDobavljaca[i];
+                        br.magacin.ListaDobavljaca[i] = br.magacin.ListaDobavljaca[j];
+                        br.magacin.ListaDobavljaca[j] = pom;
                     }
-                    else if (nacinSortiranja == 2 && magacin.ListaDobavljaca[i].ID_Dobavljaca < magacin.ListaDobavljaca[j].ID_Dobavljaca)
+                    else if (nacinSortiranja == 2 && br.magacin.ListaDobavljaca[i].ID_Dobavljaca < br.magacin.ListaDobavljaca[j].ID_Dobavljaca)
                     {
-                        Dobavljac pom = magacin.ListaDobavljaca[i];
-                        magacin.ListaDobavljaca[i] = magacin.ListaDobavljaca[j];
-                        magacin.ListaDobavljaca[j] = pom;
+                        Dobavljac pom = br.magacin.ListaDobavljaca[i];
+                        br.magacin.ListaDobavljaca[i] = br.magacin.ListaDobavljaca[j];
+                        br.magacin.ListaDobavljaca[j] = pom;
                     }
-                    else if (nacinSortiranja == 3 && magacin.ListaDobavljaca[i].ID_Dobavljaca > magacin.ListaDobavljaca[j].ID_Dobavljaca)
+                    else if (nacinSortiranja == 3 && br.magacin.ListaDobavljaca[i].ID_Dobavljaca > br.magacin.ListaDobavljaca[j].ID_Dobavljaca)
                     {
-                        Dobavljac pom = magacin.ListaDobavljaca[i];
-                        magacin.ListaDobavljaca[i] = magacin.ListaDobavljaca[j];
-                        magacin.ListaDobavljaca[j] = pom;
+                        Dobavljac pom = br.magacin.ListaDobavljaca[i];
+                        br.magacin.ListaDobavljaca[i] = br.magacin.ListaDobavljaca[j];
+                        br.magacin.ListaDobavljaca[j] = pom;
                     }
                 }
             }
@@ -75,13 +74,13 @@ namespace SI2021_CoffeeMachineApp
         private void Prikazi()
         {
             dataGridView1.Rows.Clear();
-            if (magacin.ListaDobavljaca.Count > 1)
-                dataGridView1.Rows.Add(magacin.ListaDobavljaca.Count - 1);
-            for (int i = 0; i < magacin.ListaDobavljaca.Count; i++)
+            if (br.magacin.ListaDobavljaca.Count > 1)
+                dataGridView1.Rows.Add(br.magacin.ListaDobavljaca.Count - 1);
+            for (int i = 0; i < br.magacin.ListaDobavljaca.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = magacin.ListaDobavljaca[i].ID_Dobavljaca;
-                dataGridView1.Rows[i].Cells[1].Value = magacin.ListaDobavljaca[i].Naziv;
-                dataGridView1.Rows[i].Cells[2].Value = magacin.ListaDobavljaca[i].Adresa;
+                dataGridView1.Rows[i].Cells[0].Value = br.magacin.ListaDobavljaca[i].ID_Dobavljaca;
+                dataGridView1.Rows[i].Cells[1].Value = br.magacin.ListaDobavljaca[i].Naziv;
+                dataGridView1.Rows[i].Cells[2].Value = br.magacin.ListaDobavljaca[i].Adresa;
             }
         }
 
@@ -108,7 +107,7 @@ namespace SI2021_CoffeeMachineApp
                         MessageBox.Show("Uspešno ste uneli dobavljača.");
                         naziv.Text = "";
                         adresa.Text = "";
-                        magacin = br.getData();
+                        br.magacin = br.getData();
                         Prikazi();
                     }
                     else
@@ -140,7 +139,7 @@ namespace SI2021_CoffeeMachineApp
                                 check = true;
                                 naziv.Text = "";
                                 adresa.Text = "";
-                                magacin = br.getData();
+                                br.magacin = br.getData();
                                 Prikazi();
                             }
                             else
@@ -168,7 +167,7 @@ namespace SI2021_CoffeeMachineApp
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (magacin.ListaDobavljaca.Count <= 0)
+            if (br.magacin.ListaDobavljaca.Count <= 0)
                 return;
             naziv.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             adresa.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
