@@ -16,7 +16,7 @@ namespace SI2021_CoffeeMachineApp
     public partial class PrikazNarudzbine : Form
     {
         public Magacin magacin { get; set; }
-        public int nacinSortiranja { get; set; }
+        private int nacinSortiranja { get; set; }
         private readonly BusinessRepository br = new BusinessRepository();
         public PrikazNarudzbine(Magacin magacin)
         {

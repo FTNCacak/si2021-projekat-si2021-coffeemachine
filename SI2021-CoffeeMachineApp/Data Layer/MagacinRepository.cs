@@ -257,7 +257,10 @@ namespace Data_Layer
                 comm.Parameters.AddWithValue("@telefon", r.Telefon);
                 comm.Parameters.AddWithValue("@jmbg", r.JMBG);
                 comm.Parameters.AddWithValue("@email", r.Email);
-                comm.Parameters.AddWithValue("@id_rukovodioca", r.FK_Rukovodilac.ID_Radnika);
+                if (r.FK_Rukovodilac == null)
+                    comm.Parameters.AddWithValue("@id_rukovodioca", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@id_rukovodioca", r.FK_Rukovodilac.ID_Radnika);
                 comm.Parameters.AddWithValue("@username", r.Username);
                 comm.Parameters.AddWithValue("@password", r.Password);
                 return comm.ExecuteNonQuery();

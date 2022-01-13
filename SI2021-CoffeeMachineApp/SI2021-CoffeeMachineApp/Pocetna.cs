@@ -216,5 +216,53 @@ namespace SI2021_CoffeeMachineApp
                 }
             }
         }
+
+        private void upisNarudžbinaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (UpisNarudzbina un = new UpisNarudzbina(magacin))
+            {
+                un.ShowDialog();
+                if (un.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = un.magacin;
+                }
+            }
+        }
+
+        private void upisEvidencijaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (UpisEvidencija ue = new UpisEvidencija(magacin))
+            {
+                ue.ShowDialog();
+                if (ue.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = ue.magacin;
+                }
+            }
+        }
+
+        private void upisKorisnikaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (UpisKorisnika uk = new UpisKorisnika(magacin))
+            {
+                uk.ShowDialog();
+                if (uk.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = uk.magacin;
+                }
+            }
+        }
+
+        private void upisRadnikaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (UpisRadnika ur = new UpisRadnika(magacin))
+            {
+                ur.ShowDialog();
+                if (ur.DialogResult == DialogResult.Cancel)
+                {
+                    this.magacin = ur.magacin;
+                }
+            }
+        }
     }
 }

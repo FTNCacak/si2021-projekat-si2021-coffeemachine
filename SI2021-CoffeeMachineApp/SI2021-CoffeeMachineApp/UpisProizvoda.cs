@@ -206,10 +206,10 @@ namespace SI2021_CoffeeMachineApp
                     }
                     else
                     {
-                        MessageBox.Show("Slika pod ovim nazivom već postoji! Pokušajte da promenite naziv izvorne slike, ili da dodate drugu sliku proizvoda.");
-                        pictureBox1.Image = null;
-                        putanjaDoSlike = "";
-                        return;
+                        MessageBox.Show("Slika pod ovim nazivom već postoji! Pokušajte da promenite naziv izvorne slike, ili da dodate drugu sliku proizvoda. Trenutna slika pod ovim nazivom koja se nalazi u bazi podataka biće upisana kao Slika Proizvoda za ovaj proizvod.");
+                        //pictureBox1.Image = null;
+                        //putanjaDoSlike = "";
+                        //return;
                     }
 
                     putanjaDoSlike = "..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg";
@@ -283,10 +283,10 @@ namespace SI2021_CoffeeMachineApp
                         }
                         else
                         {
-                            MessageBox.Show("Slika pod ovim nazivom već postoji! Pokušajte da promenite naziv izvorne slike, ili da dodate drugu sliku proizvoda.");
-                            pictureBox1.Image = null;
-                            putanjaDoSlike = "";
-                            return;
+                            MessageBox.Show("Slika ažuriranog proizvoda ostaće nepromenjena. Ako želite da je promenite izaberite drugu sliku sa drugačijim nazivom.");
+                            //pictureBox1.Image = null;
+                            //putanjaDoSlike = "";
+                            //return;
                         }
 
                         putanjaDoSlike = "..\\..\\Images\\" + putanjaDoSlike.Split('\\').Last().Split('.')[0] + ".jpg";

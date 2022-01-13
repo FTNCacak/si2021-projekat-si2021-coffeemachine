@@ -192,12 +192,14 @@ namespace SI2021_CoffeeMachineApp
             this.upisNarudžbinaToolStripMenuItem.Name = "upisNarudžbinaToolStripMenuItem";
             this.upisNarudžbinaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.upisNarudžbinaToolStripMenuItem.Text = "Upis narudžbina";
+            this.upisNarudžbinaToolStripMenuItem.Click += new System.EventHandler(this.upisNarudžbinaToolStripMenuItem_Click);
             // 
             // upisEvidencijaToolStripMenuItem
             // 
             this.upisEvidencijaToolStripMenuItem.Name = "upisEvidencijaToolStripMenuItem";
             this.upisEvidencijaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.upisEvidencijaToolStripMenuItem.Text = "Upis evidencije";
+            this.upisEvidencijaToolStripMenuItem.Click += new System.EventHandler(this.upisEvidencijaToolStripMenuItem_Click);
             // 
             // upisRadnikaToolStripMenuItem
             // 
@@ -205,6 +207,7 @@ namespace SI2021_CoffeeMachineApp
             this.upisRadnikaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.upisRadnikaToolStripMenuItem.Text = "Upis radnika";
             this.upisRadnikaToolStripMenuItem.Visible = false;
+            this.upisRadnikaToolStripMenuItem.Click += new System.EventHandler(this.upisRadnikaToolStripMenuItem_Click);
             // 
             // upisKorisnikaToolStripMenuItem
             // 
@@ -212,6 +215,7 @@ namespace SI2021_CoffeeMachineApp
             this.upisKorisnikaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.upisKorisnikaToolStripMenuItem.Text = "Upis korisnika";
             this.upisKorisnikaToolStripMenuItem.Visible = false;
+            this.upisKorisnikaToolStripMenuItem.Click += new System.EventHandler(this.upisKorisnikaToolStripMenuItem_Click);
             // 
             // webFormaToolStripMenuItem
             // 
