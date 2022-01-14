@@ -202,7 +202,14 @@ namespace SI2021_CoffeeMachineApp
             }
             br.magacin = br.getData();
             if (check)
+            {
                 MessageBox.Show("Uspešno obrisani podaci!");
+                naziv.Text = "";
+                drzava.Text = "";
+                adresa.Text = "";
+                opis.Text = "";
+            }
+                
             else
                 MessageBox.Show("Podaci nisu obrisani!");
             Prikazi();

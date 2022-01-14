@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Data_Layer;
 using Data_Layer.Models;
-using Business_Layer;
+using Business_Layer; 
 
 namespace SI2021_CoffeeMachineApp
 {
@@ -190,7 +190,11 @@ namespace SI2021_CoffeeMachineApp
             }
             br.magacin = br.getData();
             if (check)
+            {
                 MessageBox.Show("Uspešno obrisani podaci!");
+                naziv.Text = "";
+                adresa.Text = "";
+            }
             else
                 MessageBox.Show("Podaci nisu obrisani!");
             Prikazi();

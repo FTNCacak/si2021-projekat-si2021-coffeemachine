@@ -98,5 +98,10 @@ namespace MagacinWebApp
                 ListBox1.Items.Add(p);
             }
         }
+
+        protected void Button5_Click(object sender, EventArgs e)
+        {
+      
+        }
     }
 }

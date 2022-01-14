@@ -185,7 +185,12 @@ namespace SI2021_CoffeeMachineApp
             }
             br.magacin = br.getData();
             if (check)
-                MessageBox.Show("Uspešno obrisani podaci!");
+            { 
+            MessageBox.Show("Uspešno obrisani podaci!");
+                napomena.Text = "";
+                opis.Text = "";
+                dateTimePicker1.Value = DateTime.Now;
+            }
             else
                 MessageBox.Show("Podaci nisu obrisani!");
             Prikazi();

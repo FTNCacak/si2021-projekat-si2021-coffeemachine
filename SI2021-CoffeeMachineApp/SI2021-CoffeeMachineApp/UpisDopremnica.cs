@@ -226,7 +226,12 @@ namespace SI2021_CoffeeMachineApp
             }
             br.magacin = br.getData();
             if (check)
+            {
+
                 MessageBox.Show("Uspešno obrisani podaci!");
+                FKProizvod.SelectedIndex = -1;
+                FKDobavljac.SelectedIndex = -1;
+            }
             else
                 MessageBox.Show("Podaci nisu obrisani!");
             Prikazi();

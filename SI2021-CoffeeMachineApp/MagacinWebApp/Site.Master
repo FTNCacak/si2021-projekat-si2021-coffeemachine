@@ -47,7 +47,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" runat="server" href="~/">Coffemachine - Magacin</a>
-                </div>
+                    </div>
             </div>
         </div>
         <div class="container body-content">
@@ -79,6 +79,9 @@
                     <asp:Button ID="Button4" runat="server" Text="Kupi" OnClick="Button4_Click" />
                 </div>
             </div>
+            <br />
+            <hr />
+                    <asp:Button ID="btnIzlaz" runat="server" Height="68px" OnClientClick="window.close(); return false;" Text="Izlaz sa stranice" Width="890px" OnClick="Button5_Click" />
             <hr />
             <footer>
                 <p>
