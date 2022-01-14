@@ -49,6 +49,7 @@ namespace SI2021_CoffeeMachineApp
             this.label8 = new System.Windows.Forms.Label();
             this.prezime = new System.Windows.Forms.TextBox();
             this.role = new System.Windows.Forms.ComboBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -231,19 +232,28 @@ namespace SI2021_CoffeeMachineApp
             this.role.FormattingEnabled = true;
             this.role.Items.AddRange(new object[] {
             "Običan user",
-            "Viši user",
-            "Glavni user",
             "Admin"});
             this.role.Location = new System.Drawing.Point(230, 206);
             this.role.Name = "role";
             this.role.Size = new System.Drawing.Size(218, 21);
             this.role.TabIndex = 73;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(502, 137);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(218, 37);
+            this.btnDelete.TabIndex = 74;
+            this.btnDelete.Text = "Obriši korisnika";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // UpisKorisnika
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 629);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.role);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label6);
@@ -295,5 +305,6 @@ namespace SI2021_CoffeeMachineApp
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox prezime;
         private System.Windows.Forms.ComboBox role;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

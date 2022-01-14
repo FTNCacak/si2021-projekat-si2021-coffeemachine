@@ -107,28 +107,5 @@ namespace SI2021_CoffeeMachineApp
             Sort();
             Prikazi();
         }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (br.magacin.ListaDopremnica.Count <= 0)
-                return;
-            bool check = false;
-            foreach (DataGridViewRow Row in dataGridView1.SelectedRows)
-            {
-                int id = Convert.ToInt32(Row.Cells[0].Value.ToString());
-                if(!br.DeleteDopremnica(id))
-                {
-                    check = false;
-                    break;
-                }
-                check = true;
-            }
-            br.magacin = br.getData();
-            if (check)
-                MessageBox.Show("Uspešno obrisani podaci!");
-            else
-                MessageBox.Show("Podaci nisu obrisani!");
-            Prikazi();
-        }
     }
 }

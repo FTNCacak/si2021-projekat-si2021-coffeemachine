@@ -43,6 +43,7 @@ namespace SI2021_CoffeeMachineApp
             this.FKProizvod = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.FKNarudzbina = new System.Windows.Forms.ComboBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,11 +74,11 @@ namespace SI2021_CoffeeMachineApp
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(502, 115);
+            this.btnUpdate.Location = new System.Drawing.Point(502, 95);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(218, 37);
             this.btnUpdate.TabIndex = 72;
-            this.btnUpdate.Text = "Ažuriraj evidencije";
+            this.btnUpdate.Text = "Ažuriraj evidenciju";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
@@ -179,11 +180,22 @@ namespace SI2021_CoffeeMachineApp
             this.FKNarudzbina.Size = new System.Drawing.Size(218, 21);
             this.FKNarudzbina.TabIndex = 75;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(502, 138);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(218, 37);
+            this.btnDelete.TabIndex = 79;
+            this.btnDelete.Text = "Obriši evidenciju";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // UpisEvidencija
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 559);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.FKProizvod);
             this.Controls.Add(this.label3);
@@ -223,5 +235,6 @@ namespace SI2021_CoffeeMachineApp
         private System.Windows.Forms.ComboBox FKProizvod;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox FKNarudzbina;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

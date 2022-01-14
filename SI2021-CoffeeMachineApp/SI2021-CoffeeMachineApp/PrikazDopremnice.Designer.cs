@@ -31,7 +31,6 @@ namespace SI2021_CoffeeMachineApp
         {
             this.button1 = new System.Windows.Forms.Button();
             this.cbNacinSortiranja = new System.Windows.Forms.ComboBox();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -63,16 +62,6 @@ namespace SI2021_CoffeeMachineApp
             this.cbNacinSortiranja.TabIndex = 14;
             this.cbNacinSortiranja.SelectedIndexChanged += new System.EventHandler(this.cbNacinSortiranja_SelectedIndexChanged);
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(590, 360);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(198, 42);
-            this.btnDelete.TabIndex = 13;
-            this.btnDelete.Text = "Obriši proizvod";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -90,7 +79,6 @@ namespace SI2021_CoffeeMachineApp
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cbNacinSortiranja);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.dataGridView1);
             this.Name = "PrikazDopremnice";
             this.Text = "Prikaz Dopremnice";
@@ -104,7 +92,6 @@ namespace SI2021_CoffeeMachineApp
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cbNacinSortiranja;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

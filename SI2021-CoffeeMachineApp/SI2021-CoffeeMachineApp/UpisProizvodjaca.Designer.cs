@@ -43,6 +43,7 @@ namespace SI2021_CoffeeMachineApp
             this.label3 = new System.Windows.Forms.Label();
             this.opis = new System.Windows.Forms.TextBox();
             this.cbNacinSortiranja = new System.Windows.Forms.ComboBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@ namespace SI2021_CoffeeMachineApp
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(502, 110);
+            this.btnUpdate.Location = new System.Drawing.Point(502, 84);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(218, 37);
             this.btnUpdate.TabIndex = 33;
@@ -68,7 +69,7 @@ namespace SI2021_CoffeeMachineApp
             // 
             // btnUpisi
             // 
-            this.btnUpisi.Location = new System.Drawing.Point(502, 49);
+            this.btnUpisi.Location = new System.Drawing.Point(502, 40);
             this.btnUpisi.Name = "btnUpisi";
             this.btnUpisi.Size = new System.Drawing.Size(218, 37);
             this.btnUpisi.TabIndex = 32;
@@ -175,11 +176,22 @@ namespace SI2021_CoffeeMachineApp
             this.cbNacinSortiranja.TabIndex = 38;
             this.cbNacinSortiranja.SelectedIndexChanged += new System.EventHandler(this.cbNacinSortiranja_SelectedIndexChanged);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(502, 130);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(218, 37);
+            this.btnDelete.TabIndex = 39;
+            this.btnDelete.Text = "Obriši proizvođača";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // UpisProizvodjaca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 543);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.cbNacinSortiranja);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.opis);
@@ -218,5 +230,6 @@ namespace SI2021_CoffeeMachineApp
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox opis;
         private System.Windows.Forms.ComboBox cbNacinSortiranja;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

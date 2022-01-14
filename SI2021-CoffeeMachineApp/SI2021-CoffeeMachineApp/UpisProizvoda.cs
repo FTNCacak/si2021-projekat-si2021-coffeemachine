@@ -344,5 +344,43 @@ namespace SI2021_CoffeeMachineApp
             pictureBox1.Image = slika;
             pb.Dispose();
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (br.magacin.ListaProizvoda.Count <= 0)
+                return;
+            bool check2 = false;
+            foreach (DataGridViewRow Row in dataGridView1.SelectedRows)
+            {
+                int id = Convert.ToInt32(Row.Cells[1].Value.ToString());
+                if (!br.DeleteProizvod(id))
+                {
+                    check2 = false;
+                    break;
+                }
+                check2 = true;
+                string putanja = br.magacin.ListaProizvoda[Row.Index].Slika_Proizvoda;
+                bool check = false;
+                foreach (Proizvod proizvod in br.magacin.ListaProizvoda)
+                {
+                    if (proizvod.Slika_Proizvoda.Equals(putanja) && proizvod.ID_Proizvoda != id)
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+                if (!check)
+                {
+                    File.Delete(putanja);
+                }
+
+            }
+            br.magacin = br.getData();
+            if (check2)
+                MessageBox.Show("Uspešno obrisani podaci!");
+            else
+                MessageBox.Show("Podaci nisu obrisani!");
+            Prikazi();
+        }
     }
 }

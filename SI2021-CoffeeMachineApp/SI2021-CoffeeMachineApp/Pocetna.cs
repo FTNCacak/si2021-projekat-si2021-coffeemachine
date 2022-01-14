@@ -35,20 +35,19 @@ namespace SI2021_CoffeeMachineApp
                 {
                     korisnik = f.korisnik;
                     menuStrip1.Items[0].Enabled = true;
-                    menuStrip1.Items[1].Enabled = true;
                     if (korisnik.Role.ToUpper().Equals("ADMIN"))
                     {
+                        upisToolStripMenuItem.Enabled = true;
                         prikazRadnikaToolStripMenuItem.Visible = true;
                         prikazKorisnikaToolStripMenuItem.Visible = true;
                         upisRadnikaToolStripMenuItem.Visible = true;
                         upisKorisnikaToolStripMenuItem.Visible = true;
                     }
                     else
-                    {
-                        prikazRadnikaToolStripMenuItem.Visible = false;
-                        prikazKorisnikaToolStripMenuItem.Visible = false;
-                        upisRadnikaToolStripMenuItem.Visible = false;
-                        upisKorisnikaToolStripMenuItem.Visible = false;
+                    { 
+                        upisToolStripMenuItem.Enabled = false;
+                        prikazRadnikaToolStripMenuItem.Visible = true;
+                        prikazKorisnikaToolStripMenuItem.Visible = true;
                     }
                     odjaviSeToolStripMenuItem.Visible = true;
                     prijaviSeToolStripMenuItem.Visible = false;
@@ -270,6 +269,11 @@ namespace SI2021_CoffeeMachineApp
                     this.br.getData();
                 }
             }
+        }
+
+        private void webFormaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://localhost:44353/");
         }
     }
 }

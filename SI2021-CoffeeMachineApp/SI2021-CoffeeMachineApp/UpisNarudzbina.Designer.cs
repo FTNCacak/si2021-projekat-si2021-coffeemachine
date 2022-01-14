@@ -41,6 +41,7 @@ namespace SI2021_CoffeeMachineApp
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,17 +70,17 @@ namespace SI2021_CoffeeMachineApp
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(502, 105);
+            this.btnUpdate.Location = new System.Drawing.Point(502, 78);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(218, 37);
             this.btnUpdate.TabIndex = 60;
-            this.btnUpdate.Text = "Ažuriraj narudžbine";
+            this.btnUpdate.Text = "Ažuriraj narudžbinu";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnUpisi
             // 
-            this.btnUpisi.Location = new System.Drawing.Point(502, 53);
+            this.btnUpisi.Location = new System.Drawing.Point(502, 35);
             this.btnUpisi.Name = "btnUpisi";
             this.btnUpisi.Size = new System.Drawing.Size(218, 37);
             this.btnUpisi.TabIndex = 59;
@@ -155,11 +156,22 @@ namespace SI2021_CoffeeMachineApp
             this.label2.TabIndex = 64;
             this.label2.Text = "Datum narudžbine";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(502, 121);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(218, 37);
+            this.btnDelete.TabIndex = 65;
+            this.btnDelete.Text = "Obriši narudžbinu";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // UpisNarudzbina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 576);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.cbNacinSortiranja);
@@ -195,5 +207,6 @@ namespace SI2021_CoffeeMachineApp
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

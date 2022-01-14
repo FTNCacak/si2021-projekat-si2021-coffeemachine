@@ -251,5 +251,28 @@ namespace SI2021_CoffeeMachineApp
             }
             catch { MessageBox.Show("Podaci nisu ispravno uneti!"); }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (br.magacin.ListaRadnika.Count <= 0)
+                return;
+            bool check = false;
+            foreach (DataGridViewRow Row in dataGridView1.SelectedRows)
+            {
+                int id = Convert.ToInt32(Row.Cells[0].Value.ToString());
+                if (!br.DeleteRadnik(id))
+                {
+                    check = false;
+                    break;
+                }
+                check = true;
+            }
+            br.magacin = br.getData();
+            if (check)
+                MessageBox.Show("Uspešno obrisani podaci!");
+            else
+                MessageBox.Show("Podaci nisu obrisani!");
+            Prikazi();
+        }
     }
 }

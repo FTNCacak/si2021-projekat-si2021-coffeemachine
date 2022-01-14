@@ -207,5 +207,36 @@ namespace SI2021_CoffeeMachineApp
             opis.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
             napomena.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (br.magacin.ListaEvidencija.Count <= 0)
+                return;
+            bool check = false;
+            foreach (DataGridViewRow Row in dataGridView1.SelectedRows)
+            {
+                int id_narudzbine = Convert.ToInt32(Row.Cells[2].Value.ToString());
+                int id_proizvoda =  listaSelektovanihProizvodID[Row.Index];
+                if (!br.DeleteEvidencija(id_narudzbine, id_proizvoda))
+                {
+                    check = false;
+                    break;
+                }
+                check = true;
+            }
+            br.magacin = br.getData();
+            if (check)
+            {
+                MessageBox.Show("Uspešno obrisani podaci!");
+                FKNarudzbina.SelectedIndex = -1;
+                FKProizvod.SelectedIndex = -1;
+                opis.Text = "";
+                napomena.Text = "";
+                br.magacin = br.getData();
+                Prikazi();
+            }     
+            else
+                MessageBox.Show("Podaci nisu obrisani!");
+        }
     }
 }

@@ -341,7 +341,7 @@ namespace Data_Layer
             using (SqlConnection conn = new SqlConnection(ConnString))
             {
                 conn.Open();
-                string query = string.Format("DELETE FROM Evidencija WHERE ID_Narudzbine = {0} AND ID_Proizvoda = {1}", ID_Narudzbine, ID_Proizvoda);
+                string query = string.Format("DELETE FROM Evidencija WHERE FK_ID_Narudzbine = {0} AND FK_ID_Proizvoda = {1}", ID_Narudzbine, ID_Proizvoda);
                 SqlCommand comm = new SqlCommand(query, conn);
                 return comm.ExecuteNonQuery();
             }

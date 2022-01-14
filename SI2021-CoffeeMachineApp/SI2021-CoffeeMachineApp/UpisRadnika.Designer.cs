@@ -51,6 +51,7 @@ namespace SI2021_CoffeeMachineApp
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.jmbg = new System.Windows.Forms.TextBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -252,11 +253,22 @@ namespace SI2021_CoffeeMachineApp
             this.jmbg.Size = new System.Drawing.Size(218, 20);
             this.jmbg.TabIndex = 94;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(502, 116);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(218, 37);
+            this.btnDelete.TabIndex = 96;
+            this.btnDelete.Text = "Obriši radnika";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // UpisRadnika
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 620);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.jmbg);
             this.Controls.Add(this.FKRukovodilac);
@@ -312,5 +324,6 @@ namespace SI2021_CoffeeMachineApp
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox jmbg;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
