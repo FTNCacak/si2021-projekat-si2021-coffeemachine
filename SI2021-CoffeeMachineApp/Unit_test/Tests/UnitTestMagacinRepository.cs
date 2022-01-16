@@ -351,5 +351,198 @@ namespace Unit_test.Tests
 
             Assert.AreEqual(result, broj != 0);
         }
+        [TestMethod]
+        public void UnitTest14()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.UpdateNarudzbina(1, narudzbina)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.UpdateNarudzbina(1, narudzbina);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+        public void UnitTest15()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.UpdateProizvod(1,proizvod)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.UpdateProizvod(1, proizvod);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+        public void UnitTest16()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.UpdateProizvodjac(1, proizvodjac)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.UpdateProizvodjac(1, proizvodjac);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+        public void UnitTest17()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.UpdateRadnik(1, radnik)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.UpdateRadnik(1, radnik);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+
+        public void UnitTest18()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.DeleteDobavljac(1)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.DeleteDobavljac(1);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+        public void UnitTest19()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.DeleteDopremnica(1)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.DeleteDopremnica(1);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+        public void UnitTest20()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.DeleteEvidencija(1,1)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.DeleteEvidencija(1,1);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+        public void UnitTest21()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.DeleteKorisnik(1)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.DeleteKorisnik(1);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+        public void UnitTest22()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.DeleteNarudzbina(1)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.DeleteNarudzbina(1);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+        public void UnitTest23()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.DeleteProizvod(1)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.DeleteProizvod(1);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+        public void UnitTest24()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.DeleteProizvodjac(1)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.DeleteProizvodjac(1);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
+        [TestMethod]
+        public void UnitTest25()
+        {
+            // Arrange
+            int broj = 0;
+            mockMagacinRepository.Setup(x => x.DeleteRadnik(1)).Returns(broj);
+            businessrepository = new BusinessRepository(mockMagacinRepository.Object);
+
+            // Act
+
+            var result = businessrepository.DeleteRadnik(1);
+
+            // Assert
+
+            Assert.AreEqual(result, broj != 0);
+        }
     }
 }
