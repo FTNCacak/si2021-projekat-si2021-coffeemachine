@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business Layer", "Business 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagacinWebApp", "MagacinWebApp\MagacinWebApp.csproj", "{2C21FB2E-53BD-45F7-91BA-A6AD1C9C30A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit_test", "Unit_test\Unit_test.csproj", "{D195F04C-3645-4154-A99B-EB5210C3AEF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2C21FB2E-53BD-45F7-91BA-A6AD1C9C30A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C21FB2E-53BD-45F7-91BA-A6AD1C9C30A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C21FB2E-53BD-45F7-91BA-A6AD1C9C30A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D195F04C-3645-4154-A99B-EB5210C3AEF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D195F04C-3645-4154-A99B-EB5210C3AEF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D195F04C-3645-4154-A99B-EB5210C3AEF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D195F04C-3645-4154-A99B-EB5210C3AEF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

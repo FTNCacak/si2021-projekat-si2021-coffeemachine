@@ -1,0 +1,37 @@
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Unit_test.dll.config
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Unit_test.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Unit_test.pdb
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Business Layer.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Castle.Core.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Data Layer.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Moq.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\SI2021-CoffeeMachineApp.exe
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Business Layer.pdb
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Business Layer.dll.config
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Data Layer.pdb
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Data Layer.dll.config
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\SI2021-CoffeeMachineApp.pdb
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\SI2021-CoffeeMachineApp.exe.config
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Castle.Core.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Moq.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\obj\Debug\Unit_test.csproj.AssemblyReference.cache
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\obj\Debug\Unit_test.csproj.CoreCompileInputs.cache
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\obj\Debug\Unit_test.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Unit_test\obj\Debug\Unit_test.pdb

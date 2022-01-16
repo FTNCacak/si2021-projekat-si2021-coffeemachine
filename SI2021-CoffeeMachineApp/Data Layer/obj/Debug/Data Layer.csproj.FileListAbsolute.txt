@@ -80,3 +80,8 @@ D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data
 D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.csproj.CoreCompileInputs.cache
 D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.dll
 D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.pdb
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\bin\Debug\Castle.Core.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\bin\Debug\Moq.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\bin\Debug\Castle.Core.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\bin\Debug\Moq.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Data Layer\obj\Debug\Data Layer.csproj.CopyComplete
