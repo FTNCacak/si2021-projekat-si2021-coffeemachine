@@ -47,7 +47,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" runat="server" href="~/">Coffemachine - Magacin</a>
-                    </div>
+                </div>
             </div>
         </div>
         <div class="container body-content">
@@ -56,15 +56,17 @@
             <hr />
             <div class="row">
                 <div class="col-md-6 center">
-                    <asp:ListBox ID="ListBox1" runat="server" Height="92px" Width="1206px">
+
+                    <asp:ListBox rows=5 ID="ListBox1" runat="server" Height="92px" Width="1206px">
                     </asp:ListBox>
+
                     <br>
                     <br>
                     <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                     <br>
                     <br>
                     <asp:Button ID="Button1" runat="server" Text="Pretraži" OnClick="Button1_Click" />
-                    <asp:Button ID="Button2" runat="server" Text="Dodaj u korpu" OnClick="Button2_Click" />
+                    <asp:Button ID="Button2" runat="server" Text="Dodaj u korpu" OnClick="Button2_Click" autopostback="false"/>
                  </div>
                 <div class="col-md-6">
                     <asp:ListBox ID="ListBox2" runat="server" Height="92px" Width="1206px">
@@ -76,12 +78,11 @@
                     <br>
                     <br>
                     <asp:Button ID="Button3" runat="server" Text="Izbriši iz korpe" OnClick="Button3_Click" />
+                    
                     <asp:Button ID="Button4" runat="server" Text="Kupi" OnClick="Button4_Click" />
+                    
                 </div>
             </div>
-            <br />
-            <hr />
-                    <asp:Button ID="btnIzlaz" runat="server" Height="68px" OnClientClick="window.close(); return false;" Text="Izlaz sa stranice" Width="890px" OnClick="Button5_Click" />
             <hr />
             <footer>
                 <p>

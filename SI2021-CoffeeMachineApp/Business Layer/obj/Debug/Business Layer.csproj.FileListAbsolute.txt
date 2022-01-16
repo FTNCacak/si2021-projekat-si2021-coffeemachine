@@ -78,3 +78,24 @@ C:\Users\Korisnik\Desktop\glt\si2021-projekat-si2021-coffeemachine\SI2021-Coffee
 C:\Users\Korisnik\Desktop\glt\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\obj\Debug\Business Layer.csproj.CopyComplete
 C:\Users\Korisnik\Desktop\glt\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\obj\Debug\Business Layer.dll
 C:\Users\Korisnik\Desktop\glt\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\obj\Debug\Business Layer.pdb
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Business Layer.dll.config
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Business Layer.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Business Layer.pdb
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Data Layer.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Data Layer.pdb
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Data Layer.dll.config
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\obj\Debug\Business Layer.csproj.AssemblyReference.cache
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\obj\Debug\Business Layer.csproj.CoreCompileInputs.cache
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\obj\Debug\Business Layer.csproj.CopyComplete
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\obj\Debug\Business Layer.dll
+D:\GitProjekat\si2021-projekat-si2021-coffeemachine\SI2021-CoffeeMachineApp\Business Layer\obj\Debug\Business Layer.pdb
